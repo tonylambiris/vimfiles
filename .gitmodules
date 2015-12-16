@@ -1,0 +1,84 @@
+[submodule "bundle/ScrollColors"]
+	path = bundle/ScrollColors
+	url = git@github.com:vim-scripts/ScrollColors.git
+[submodule "bundle/csapprox"]
+	path = bundle/csapprox
+	url = git@github.com:godlygeek/csapprox.git
+[submodule "bundle/delimitMate"]
+	path = bundle/delimitMate
+	url = git@github.com:Raimondi/delimitMate.git
+[submodule "bundle/indentLine"]
+	path = bundle/indentLine
+	url = git@github.com:Yggdroot/indentLine.git
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = git@github.com:scrooloose/syntastic.git
+[submodule "bundle/tagbar"]
+	path = bundle/tagbar
+	url = git@github.com:majutsushi/tagbar.git
+[submodule "bundle/tmuxline.vim"]
+	path = bundle/tmuxline.vim
+	url = git@github.com:edkolev/tmuxline.vim.git
+[submodule "bundle/vim-airline"]
+	path = bundle/vim-airline
+	url = git@github.com:bling/vim-airline.git
+[submodule "bundle/vim-codefmt"]
+	path = bundle/vim-codefmt
+	url = git@github.com:google/vim-codefmt.git
+[submodule "bundle/vim-colors-solarized"]
+	path = bundle/vim-colors-solarized
+	url = git@github.com:altercation/vim-colors-solarized.git
+[submodule "bundle/vim-colorstepper"]
+	path = bundle/vim-colorstepper
+	url = git@github.com:qualiabyte/vim-colorstepper.git
+[submodule "bundle/vim-five"]
+	path = bundle/vim-five
+	url = git@github.com:tpope/vim-fugitive.git
+[submodule "bundle/vimgutter"]
+	path = bundle/vimgutter
+	url = git@github.com:airblade/vim-gitgutter.git
+[submodule "bundle/vim-glaive"]
+	path = bundle/vim-glaive
+	url = git@github.com:google/vim-glaive.git
+[submodule "bundle/vim-go"]
+	path = bundle/vim-go
+	url = git@github.com:fatih/vim-go.git
+[submodule "bundle/vim-kolor"]
+	path = bundle/vim-kolor
+	url = git@github.com:zeis/vim-kolor.git
+[submodule "bundle/vim-lengthmatters"]
+	path = bundle/vim-lengthmatters
+	url = git@github.com:whatyouhide/vim-lengthmatters.git
+[submodule "bundle/vim-lexical"]
+	path = bundle/vim-lexical
+	url = git@github.com:reedes/vim-lexical.git
+[submodule "bundle/vim-maktaba"]
+	path = bundle/vim-maktaba
+	url = git@github.com:google/vim-maktaba.git
+[submodule "bundle/vim-markdown"]
+	path = bundle/vim-markdown
+	url = git@github.com:plasticboy/vim-markdown.git
+[submodule "bundle/vim-misc"]
+	path = bundle/vim-misc
+	url = git@github.com:xolox/vim-misc.git
+[submodule "bundle/vim-nerdtree-tabs"]
+	path = bundle/vim-nerdtree-tabs
+	url = git@github.com:jistr/vim-nerdtree-tabs.git
+[submodule "bundle/vim-reload"]
+	path = bundle/vim-reload
+	url = git@github.com:xolox/vim-reload.git
+[submodule "bundle/vim-ruby"]
+	path = bundle/vim-ruby
+	url = git@github.com:vim-ruby/vim-ruby.git
+[submodule "bundle/vim-sensible"]
+	path = bundle/vim-sensible
+	url = git@github.com:tpope/vim-sensible.git
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = git@github.com:godlygeek/tabular.git
+[submodule "bundle/vim256-color"]
+	path = bundle/vim256-color
+	url = git@github.com:noah/vim256-color.git
