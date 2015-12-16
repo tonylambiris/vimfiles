@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/tlambiris/Documents/CriticalStack/Git/packer/packer_cache'
+let g:netrw_dirhist_2='/Users/tlambiris/Documents/CriticalStack/Git/kubernetes-chef'
+let g:netrw_dirhist_3='/Users/tlambiris/Documents/CriticalStack/Git/packer/chef-repo/kubernetes/kubernetes'
+let g:netrw_dirhist_4='/Users/tlambiris/Documents/CriticalStack/Git/packer/chef-repo/bin'
+let g:netrw_dirhist_5='/Users/tlambiris/Documents/CriticalStack/Git/centos-iso/support/pkglists'
+let g:netrw_dirhist_6='/Users/tlambiris/Documents/CriticalStack/Git/bro-deployment/iso-support'
