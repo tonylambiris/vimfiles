@@ -1,6 +1,6 @@
 " Adding a new pathogen module (example):
-" cd ~/.vim/bundle
-" git submodule add https://github.com/vim-ruby/vim-ruby.git
+" cd ~/.vim
+" git submodule add https://github.com/vim-ruby/vim-ruby.git bundle/vim-ruby
 "
 " Removing a pathogen submodule:
 " git submodule deinit -f bundle/vim-ruby
@@ -80,6 +80,7 @@ set t_ut=
 
 " disable auto-commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 set textwidth=78
 set formatoptions+=t
 set wrap linebreak nolist
