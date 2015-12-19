@@ -82,6 +82,3 @@
 [submodule "bundle/vim256-color"]
 	path = bundle/vim256-color
 	url = git@github.com:noah/vim256-color.git
-[submodule "bundle/vim-colorschemes"]
-	path = bundle/vim-colorschemes
-	url = https://github.com/flazz/vim-colorschemes.git
