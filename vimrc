@@ -5,7 +5,9 @@
 " Removing a pathogen submodule:
 " git submodule deinit -f bundle/vim-ruby
 "
-" NOTES: sudo npm -g install jsonlint
+" NOTES:
+" git submodule update --init --recursive
+" sudo npm -g install jsonlint
 
 execute pathogen#infect()
 execute pathogen#helptags()
