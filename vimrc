@@ -93,6 +93,7 @@ set softtabstop=4
 set hlsearch
 set background=dark " dark | light "
 set timeoutlen=50
+set scrolloff=10
 "set colorcolumn=78
 
 let g:solarized_termcolors=256
