@@ -106,11 +106,17 @@ let g:airline_theme='hybrid'
 let g:airline_powerline_fonts=1
 
 "colorscheme kolor
-colorscheme apprentice
+"colorscheme apprentice
 "colorscheme seoul256
-"colorscheme bubblegum
-"colorscheme gruvbox
+"colorscheme blazer
+"colorscheme derefined
+"colorscheme desertedoceanburnt
+"colorscheme gravity
+"colorscheme heliotrope
+colorscheme bubblegum
 
 call togglebg#map("<F5>")
 nmap <F8> :TagbarToggle<CR>
 call lengthmatters#highlight('ctermbg=8 ctermfg=7')
+
+scriptencoding utf-8
