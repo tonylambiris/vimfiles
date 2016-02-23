@@ -105,15 +105,6 @@ let g:solarized_termcolors=256
 let g:airline_theme='hybrid'
 let g:airline_powerline_fonts=1
 
-"colorscheme kolor
-"colorscheme apprentice
-"colorscheme seoul256
-"colorscheme blazer
-"colorscheme derefined
-"colorscheme desertedoceanburnt
-"colorscheme gravity
-"colorscheme heliotrope
-
 call togglebg#map("<F5>")
 nmap <F8> :TagbarToggle<CR>
 call lengthmatters#highlight('ctermbg=8 ctermfg=7')
@@ -157,3 +148,11 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 colorscheme bubblegum
+"colorscheme kolor
+"colorscheme apprentice
+"colorscheme seoul256
+"colorscheme blazer
+"colorscheme derefined
+"colorscheme desertedoceanburnt
+"colorscheme gravity
+"colorscheme heliotrope
