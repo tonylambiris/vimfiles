@@ -86,15 +86,20 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set textwidth=78
 set formatoptions+=t
 set wrap linebreak nolist
-set tabstop=8
-set expandtab
-set shiftwidth=4
-set softtabstop=4
 set hlsearch
 set background=dark " dark | light "
 set timeoutlen=50
 set scrolloff=10
 "set colorcolumn=78
+
+set expandtab
+set tabstop=4
+set shiftwidth=4
+"set softtabstop == tabstop, noexpandtab
+
+"autocmd FileType shell setlocal noexpandtab
+autocmd FileType sh setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
+autocmd FileType Makefile setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 
 let g:solarized_termcolors=256
 "let g:kolor_italic=1                    " Enable italic. Default: 1
