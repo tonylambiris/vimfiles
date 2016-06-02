@@ -60,15 +60,25 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
+let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
+let g:go_fmt_fail_silently = 1
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" Enable VIM mouse support
+set mouse=a
+set ttymouse=xterm2
+
+" Send more characters for redraws
+set ttyfast
+
 " clipboard size
 set viminfo='100,<100,s20,h
+
 " show line numbers
 set number
 set spell spelllang=en_us
@@ -91,13 +101,20 @@ set background=dark " dark | light "
 set timeoutlen=50
 set scrolloff=10
 "set colorcolumn=78
+set mousehide
 
-set expandtab
-set tabstop=4
-set shiftwidth=4
-"set softtabstop == tabstop, noexpandtab
+""" NERDTree settings
+"let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+"let NERDTreeShowHidden = 0
+"let NERDTreeShowFiles = 1
+"let NERDTreeMinimalUI = 1
+"let NERDChristmasTree = 1
+"let NERDTreeChDirMode = 2
+let g:NERDTreeMouseMode = 2
 
-"autocmd FileType shell setlocal noexpandtab
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
 autocmd FileType sh setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 autocmd FileType Makefile setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 
