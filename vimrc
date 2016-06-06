@@ -169,12 +169,8 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-colorscheme bubblegum
-"colorscheme kolor
-"colorscheme apprentice
-"colorscheme seoul256
+"colorscheme bubblegum
+colorscheme kolor
 "colorscheme blazer
 "colorscheme derefined
 "colorscheme desertedoceanburnt
-"colorscheme gravity
-"colorscheme heliotrope
