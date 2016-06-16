@@ -73,6 +73,9 @@ set statusline+=%*
 set mouse=a
 set ttymouse=xterm2
 
+" Control-C to copy text highlighted in mouse mode
+vmap <C-C> "+y"
+
 " Send more characters for redraws
 set ttyfast
 
