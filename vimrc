@@ -121,15 +121,6 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 autocmd FileType sh setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 autocmd FileType Makefile setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 
-let g:solarized_termcolors=256
-"let g:kolor_italic=1                    " Enable italic. Default: 1
-"let g:kolor_bold=1                      " Enable bold. Default: 1
-"let g:kolor_underlined=1                " Enable underline. Default: 0
-"let g:kolor_alternative_matchparen=1    " Gray 'MatchParen' color. Default: 0
-
-let g:airline_theme='hybrid'
-let g:airline_powerline_fonts=1
-
 call togglebg#map("<F5>")
 nmap <F8> :TagbarToggle<CR>
 call lengthmatters#highlight('ctermbg=8 ctermfg=7')
@@ -172,8 +163,14 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-"colorscheme bubblegum
+"let g:solarized_termcolors=256
+"let g:kolor_italic=1                    " Enable italic. Default: 1
+"let g:kolor_bold=1                      " Enable bold. Default: 1
+"let g:kolor_underlined=1                " Enable underline. Default: 0
+"let g:kolor_alternative_matchparen=1    " Gray 'MatchParen' color. Default: 0
+
+let g:airline_theme='kolor'
+let g:airline_powerline_fonts=1
+
 colorscheme kolor
-"colorscheme blazer
-"colorscheme derefined
-"colorscheme desertedoceanburnt
+"colorscheme 256_blackdust
