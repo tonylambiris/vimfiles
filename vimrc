@@ -96,6 +96,10 @@ set t_ut=
 " disable auto-commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 set textwidth=78
 set formatoptions+=t
 set wrap linebreak nolist
