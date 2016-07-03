@@ -73,6 +73,10 @@ set statusline+=%*
 set mouse=a
 set ttymouse=xterm2
 
+" Briefly jump to the opening bracket/paren/brace
+set showmatch
+hi MatchParen    cterm=reverse
+
 " Control-C to copy text highlighted in mouse mode
 vmap <C-C> "+y"
 
@@ -90,6 +94,7 @@ set t_Co=256
 if &t_Co == 256
     hi CursorLine ctermbg=233
 endif
+
 " disable background color erase (for tmux)
 set t_ut=
 
