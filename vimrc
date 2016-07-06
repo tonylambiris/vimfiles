@@ -4,6 +4,7 @@
 "
 " Removing a pathogen submodule:
 " git submodule deinit -f bundle/vim-ruby
+" git rm --cached bundle/vim-ruby
 "
 " NOTES:
 " git submodule update --init --recursive
