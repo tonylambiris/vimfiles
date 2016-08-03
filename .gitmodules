@@ -91,3 +91,9 @@
 [submodule "bundle/vim-airline-themes.git"]
 	path = bundle/vim-airline-themes.git
 	url = https://github.com/vim-airline/vim-airline-themes.git
+[submodule "bundle/vim-wheel"]
+	path = bundle/vim-wheel
+	url = https://github.com/reedes/vim-wheel
+[submodule "bundle/vim-noscrollbar"]
+	path = bundle/vim-noscrollbar
+	url = https://github.com/gcavallanti/vim-noscrollbar.git

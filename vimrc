@@ -66,6 +66,7 @@ let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 1
 
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -137,6 +138,12 @@ call lengthmatters#highlight('ctermbg=8 ctermfg=7')
 
 scriptencoding utf-8
 
+function! Noscrollbar(...)
+    let w:airline_section_z = "%{noscrollbar#statusline(10,'-','■')}"
+    "%{noscrollbar#statusline(20,'■','◫',['◧'],['◨'])}
+endfunction
+call airline#add_statusline_func('Noscrollbar')
+
 " Return indent (all whitespace at start of a line), converted from
 " tabs to spaces if what = 1, or from spaces to tabs otherwise.
 " When converting to tabs, result has no redundant spaces.
@@ -183,5 +190,5 @@ let g:airline_theme='kolor'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 
-colorscheme kolor
 "colorscheme 256_blackdust
+colorscheme kolor
