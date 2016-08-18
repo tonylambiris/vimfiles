@@ -2,8 +2,8 @@
 " git submodule add https://github.com/vim-ruby/vim-ruby.git bundle/vim-ruby
 "
 " Removing a pathogen submodule:
-" git submodule deinit -f bundle/vim-ruby
-" git rm --cached bundle/vim-ruby
+" git submodule deinit -f bundle/vim-submodule
+" git rm --cached bundle/vim-submodule
 "
 " NOTES:
 " git submodule update --init --recursive
