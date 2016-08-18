@@ -1,5 +1,4 @@
 " Adding a new pathogen module (example):
-" cd ~/.vim
 " git submodule add https://github.com/vim-ruby/vim-ruby.git bundle/vim-ruby
 "
 " Removing a pathogen submodule:
