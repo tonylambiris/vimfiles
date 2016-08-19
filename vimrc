@@ -1,12 +1,12 @@
 " Adding a new pathogen module (example):
 " git submodule add https://github.com/vim-ruby/vim-ruby.git bundle/vim-ruby
+" git submodule update --init --recursive
 "
 " Removing a pathogen submodule:
 " git submodule deinit -f bundle/vim-submodule
 " git rm --cached bundle/vim-submodule
 "
 " NOTES:
-" git submodule update --init --recursive
 " sudo npm -g install jsonlint
 
 execute pathogen#infect()
