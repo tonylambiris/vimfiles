@@ -97,3 +97,11 @@
 [submodule "bundle/vim-noscrollbar"]
 	path = bundle/vim-noscrollbar
 	url = https://github.com/gcavallanti/vim-noscrollbar.git
+	ignore = untracked
+[submodule "bundle/vim-tags"]
+	path = bundle/vim-tags
+	url = https://github.com/szw/vim-tags.git
+	ignore = untracked
+[submodule "bundle/vim-dispatch"]
+	path = bundle/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch.git
