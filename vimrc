@@ -74,7 +74,7 @@ set statusline+=%*
 
 " Enable VIM mouse support
 set mouse=a
-set ttymouse=xterm2
+"set ttymouse=xterm2
 
 " Briefly jump to the opening bracket/paren/brace
 set showmatch
