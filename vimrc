@@ -137,6 +137,7 @@ set scrolloff=10
 "set colorcolumn=78
 set mousehide
 set undofile
+set undodir=~/.vim/undodir
 set cindent
 
 """ NERDTree settings
