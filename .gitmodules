@@ -105,3 +105,9 @@
 [submodule "bundle/vim-dispatch"]
 	path = bundle/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
+[submodule "bundle/lightline"]
+	path = bundle/lightline
+	url = https://github.com/itchyny/lightline.vim
+[submodule "bundle/setcolors"]
+	path = bundle/setcolors
+	url = https://github.com/felixhummel/setcolors.vim.git

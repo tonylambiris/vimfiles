@@ -29,6 +29,9 @@ let g:NERDTreeWinPos = "right"
 
 " jump to the last modification
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+hi Normal ctermfg=16 ctermbg=254
+
 " correctly mark json files for jsonlint
 au BufRead,BufNewFile *.json set filetype=json
 
@@ -43,12 +46,17 @@ augroup lexical
   autocmd!
   autocmd FileType markdown,mkd call lexical#init()
   autocmd FileType textile call lexical#init()
-  autocmd FileType text call lexical#init({ 'spell': 1 })
+  autocmd FileType text call lexical#init({ 'spell': 0 })
 augroup END
 
-let g:lexical#spell = 0 " 0=disabled, 1=enabled
+let g:lexical#spell = 1 " 0=disabled, 1=enabled
 let g:lexical#spelllang = ['en_us',]
 let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
+
+" fix color formatting of bash scripts
+autocmd BufRead,BufNewFile *bash*.sh set filetype=sh
+au BufRead,BufNewFile *bash*,*.sh let g:is_bash=1
+au BufRead,BufNewFile *bash*,*.sh setf sh
 
 let g:Powerline_symbols = 'fancy'
 let g:vim_markdown_folding_disabled=1
@@ -81,17 +89,18 @@ set statusline+=%*
 
 " Enable VIM mouse support
 set mouse=a
-"set ttymouse=xterm2
+set ttymouse=xterm2
 
 " Briefly jump to the opening bracket/paren/brace
 set showmatch
-hi MatchParen    cterm=reverse
+"hi MatchParen    cterm=reverse
 
 " Control-C to copy text highlighted in mouse mode
 vmap <C-C> "+y"
 
 " Send more characters for redraws
 set ttyfast
+set lazyredraw
 
 " clipboard size
 set viminfo='100,<100,s20,h
@@ -101,12 +110,16 @@ set number
 set spell spelllang=en_us
 " set 256 colors
 set t_Co=256
+
 if &t_Co == 256
+    set term=xterm-256color
     hi CursorLine ctermbg=233
 endif
 
 " disable background color erase (for tmux)
 set t_ut=
+
+set background=dark " dark | light "
 
 " disable auto-commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -119,11 +132,12 @@ set textwidth=78
 set formatoptions+=t
 set wrap linebreak nolist
 set hlsearch
-set background=dark " dark | light "
 set timeoutlen=50
 set scrolloff=10
 "set colorcolumn=78
 set mousehide
+set undofile
+set cindent
 
 """ NERDTree settings
 "let NERDTreeMinimalUI = 1
@@ -140,8 +154,8 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 autocmd FileType sh setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 autocmd FileType Makefile setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 
-call togglebg#map("<F5>")
-nmap <F8> :TagbarToggle<CR>
+"call togglebg#map("<F5>")
+"nmap <F8> :TagbarToggle<CR>
 call lengthmatters#highlight('ctermbg=8 ctermfg=7')
 
 scriptencoding utf-8
@@ -177,6 +191,7 @@ function! IndentConvert(line1, line2, what, cols)
   call histdel('search', -1)
   call setpos('.', savepos)
 endfunction
+
 command! -nargs=? -range=% Space2Tab call IndentConvert(<line1>,<line2>,0,<q-args>)
 command! -nargs=? -range=% Tab2Space call IndentConvert(<line1>,<line2>,1,<q-args>)
 command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q-args>)
@@ -188,7 +203,12 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-"let g:solarized_termcolors=256
+if !has("gui_running")
+  let &t_AB="\e[48;5;%dm"
+  let &t_AF="\e[38;5;%dm"
+endif
+
+colorscheme kolor
 "let g:kolor_italic=1                    " Enable italic. Default: 1
 "let g:kolor_bold=1                      " Enable bold. Default: 1
 "let g:kolor_underlined=1                " Enable underline. Default: 0
@@ -198,5 +218,13 @@ let g:airline_theme='kolor'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 
-"colorscheme 256_blackdust
-colorscheme kolor
+if has("spell")
+  set nospell
+  set complete+=kspell
+  hi clear SpellBad
+  hi SpellBad cterm=underline ctermfg=red
+  map <f9> :set spell!<cr>
+endif
+
+autocmd FileType help setlocal nospell
+hi Search cterm=reverse
