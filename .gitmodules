@@ -111,3 +111,6 @@
 [submodule "bundle/setcolors"]
 	path = bundle/setcolors
 	url = https://github.com/felixhummel/setcolors.vim.git
+[submodule "bundle/vim-espresso"]
+	path = bundle/vim-espresso
+	url = https://github.com/gmoe/vim-espresso.git
