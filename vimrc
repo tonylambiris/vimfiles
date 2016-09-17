@@ -197,25 +197,69 @@ command! -nargs=? -range=% Space2Tab call IndentConvert(<line1>,<line2>,0,<q-arg
 command! -nargs=? -range=% Tab2Space call IndentConvert(<line1>,<line2>,1,<q-args>)
 command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q-args>)
 
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+"highlight ExtraWhitespace ctermbg=red guibg=red
+
+" Show trailing whitespace:
+"match ExtraWhitespace /\s\+$/
+
+" Show trailing whitespace and spaces before a tab:
+"match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+"au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+"au InsertLeave * match ExtraWhitespace /\s\+$/
+
+"if version >= 702
+"  autocmd BufWinLeave * call clearmatches()
+"endif
+
 highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
+augroup WhitespaceMatch
+  " Remove ALL autocommands for the WhitespaceMatch group.
+  autocmd!
+  autocmd BufWinEnter * let w:whitespace_match_number =
+        \ matchadd('ExtraWhitespace', '\s\+$')
+  autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
+  autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
+augroup END
+
+function! s:ToggleWhitespaceMatch(mode)
+  let pattern = (a:mode == 'i') ? '\s\+\%#\@<!$' : '\s\+$'
+  if exists('w:whitespace_match_number')
+    call matchdelete(w:whitespace_match_number)
+    call matchadd('ExtraWhitespace', pattern, 10, w:whitespace_match_number)
+  else
+    " Something went wrong, try to be graceful.
+    let w:whitespace_match_number =  matchadd('ExtraWhitespace', pattern)
+  endif
+endfunction
+
+function! StripTrailingWhitespace()
+  normal mZ
+  let l:chars = col("$")
+  %s/\s\+$//e
+  normal `Z
+endfunction
+
+autocmd BufWritePre * call StripTrailingWhitespace()
 
 if !has("gui_running")
   let &t_AB="\e[48;5;%dm"
   let &t_AF="\e[38;5;%dm"
 endif
 
-colorscheme kolor
+"colorscheme kolor
 "let g:kolor_italic=1                    " Enable italic. Default: 1
 "let g:kolor_bold=1                      " Enable bold. Default: 1
 "let g:kolor_underlined=1                " Enable underline. Default: 0
 "let g:kolor_alternative_matchparen=1    " Gray 'MatchParen' color. Default: 0
 
-let g:airline_theme='kolor'
+"colorscheme muon
+"colorscheme PaperColor
+colorscheme onedark
+
+"let g:airline_theme='kolor'
+"let g:airline_theme='papercolor'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled = 1
 
