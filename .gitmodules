@@ -114,3 +114,9 @@
 [submodule "bundle/vim-espresso"]
 	path = bundle/vim-espresso
 	url = https://github.com/gmoe/vim-espresso.git
+[submodule "bundle/vim-lastplace"]
+	path = bundle/vim-lastplace
+	url = https://github.com/dietsche/vim-lastplace.git
+[submodule "bundle/YouCompleteMe"]
+	path = bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git

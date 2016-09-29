@@ -9,6 +9,7 @@
 " git rm --cached bundle/vim-submodule
 "
 " NOTES:
+" sh bundle/YouCompleteMe/install.sh
 " sudo npm -g install jsonlint
 
 execute pathogen#infect()
@@ -26,9 +27,6 @@ map <silent><F2> :PREVCOLOR<cr>
 " open NERDtree listing on the right with CTRL-n
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
-
-" jump to the last modification
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 hi Normal ctermfg=16 ctermbg=254
 
@@ -88,7 +86,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 " Enable VIM mouse support
-set mouse=a
+set mouse=r
 set ttymouse=xterm2
 
 " Briefly jump to the opening bracket/paren/brace
@@ -102,8 +100,13 @@ vmap <C-C> "+y"
 set ttyfast
 set lazyredraw
 
+" OSX == unnamed
+" Linux == unnamedplus
+"set clipboard=unnamedplus
+set clipboard=unnamed
+
 " clipboard size
-set viminfo='100,<100,s20,h
+"set viminfo='100,<100,s20,h
 
 " show line numbers
 set number
@@ -128,7 +131,7 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-set textwidth=78
+set textwidth=80
 set formatoptions+=t
 set wrap linebreak nolist
 set hlsearch
@@ -260,7 +263,7 @@ colorscheme onedark
 
 "let g:airline_theme='kolor'
 "let g:airline_theme='papercolor'
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
 if has("spell")
