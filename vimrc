@@ -1,4 +1,4 @@
-" Upon initial checkout:
+" Upon checkout and updates:
 " git submodule update --init --recursive
 "
 " Adding a new pathogen module (example):
