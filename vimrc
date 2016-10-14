@@ -1,8 +1,8 @@
-" Upon checkout and updates:
-" git submodule update --init --recursive
-"
 " Adding a new pathogen module (example):
 " git submodule add https://github.com/vim-ruby/vim-ruby.git bundle/vim-ruby
+"
+" Upon initial clone and pulls:
+" git submodule update --init --recursive
 "
 " Removing a pathogen submodule:
 " git submodule deinit -f bundle/vim-submodule
@@ -251,18 +251,9 @@ if !has("gui_running")
   let &t_AF="\e[38;5;%dm"
 endif
 
-"colorscheme kolor
-"let g:kolor_italic=1                    " Enable italic. Default: 1
-"let g:kolor_bold=1                      " Enable bold. Default: 1
-"let g:kolor_underlined=1                " Enable underline. Default: 0
-"let g:kolor_alternative_matchparen=1    " Gray 'MatchParen' color. Default: 0
-
-"colorscheme muon
-"colorscheme PaperColor
 colorscheme onedark
 
-"let g:airline_theme='kolor'
-"let g:airline_theme='papercolor'
+let g:airline_theme='tomorrow'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
