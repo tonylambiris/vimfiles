@@ -15,6 +15,11 @@
 execute pathogen#infect()
 execute pathogen#helptags()
 
+" Use 24-bit (true-color) mode when outside tmux.
+if (has("termguicolors"))
+  set termguicolors
+endif
+
 filetype plugin indent on
 syntax on
 
@@ -62,6 +67,7 @@ let g:disable_markdown_autostyle = 1
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height=5
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
@@ -86,7 +92,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 " Enable VIM mouse support
-set mouse=r
+set mouse=a
 set ttymouse=xterm2
 
 " Briefly jump to the opening bracket/paren/brace
@@ -111,6 +117,7 @@ set clipboard=unnamed
 " show line numbers
 set number
 set spell spelllang=en_us
+
 " set 256 colors
 set t_Co=256
 
@@ -121,8 +128,6 @@ endif
 
 " disable background color erase (for tmux)
 set t_ut=
-
-set background=dark " dark | light "
 
 " disable auto-commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -201,32 +206,16 @@ command! -nargs=? -range=% Tab2Space call IndentConvert(<line1>,<line2>,1,<q-arg
 command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q-args>)
 
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-"highlight ExtraWhitespace ctermbg=red guibg=red
-
-" Show trailing whitespace:
-"match ExtraWhitespace /\s\+$/
-
-" Show trailing whitespace and spaces before a tab:
-"match ExtraWhitespace /\s\+$\| \+\ze\t/
-
-"au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-"au InsertLeave * match ExtraWhitespace /\s\+$/
-
-"if version >= 702
-"  autocmd BufWinLeave * call clearmatches()
-"endif
-
-highlight ExtraWhitespace ctermbg=red guibg=red
-augroup WhitespaceMatch
-  " Remove ALL autocommands for the WhitespaceMatch group.
+augroup WhiteSpaceMatch
+  " Remove ALL autocommands for the WhiteSpaceMatch group.
   autocmd!
   autocmd BufWinEnter * let w:whitespace_match_number =
         \ matchadd('ExtraWhitespace', '\s\+$')
-  autocmd InsertEnter * call s:ToggleWhitespaceMatch('i')
-  autocmd InsertLeave * call s:ToggleWhitespaceMatch('n')
+  autocmd InsertEnter * call s:ToggleWhiteSpaceMatch('i')
+  autocmd InsertLeave * call s:ToggleWhiteSpaceMatch('n')
 augroup END
 
-function! s:ToggleWhitespaceMatch(mode)
+function! s:ToggleWhiteSpaceMatch(mode)
   let pattern = (a:mode == 'i') ? '\s\+\%#\@<!$' : '\s\+$'
   if exists('w:whitespace_match_number')
     call matchdelete(w:whitespace_match_number)
@@ -251,6 +240,7 @@ if !has("gui_running")
   let &t_AF="\e[38;5;%dm"
 endif
 
+set background=dark " dark | light "
 colorscheme onedark
 
 let g:airline_theme='tomorrow'
