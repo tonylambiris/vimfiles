@@ -243,9 +243,10 @@ endif
 set background=dark " dark | light "
 colorscheme onedark
 
-let g:airline_theme='tomorrow'
-let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 0
+let g:airline_powerline_fonts = 1
+let g:airline_theme='tomorrow'
 
 if has("spell")
   set nospell
