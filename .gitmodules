@@ -123,3 +123,9 @@
 [submodule "bundle/vim-polyglot"]
 	path = bundle/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot.git
+[submodule "bundle/GoldenView"]
+	path = bundle/GoldenView
+	url = https://github.com/zhaocai/GoldenView.Vim.git
+[submodule "bundle/bufexplorer"]
+	path = bundle/bufexplorer
+	url = https://github.com/jlanzarotta/bufexplorer.git
