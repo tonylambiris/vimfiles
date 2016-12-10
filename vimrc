@@ -15,25 +15,34 @@
 execute pathogen#infect()
 execute pathogen#helptags()
 
-" Use 24-bit (true-color) mode when outside tmux.
-if (has("termguicolors"))
-  set termguicolors
+set background=dark " dark | light "
+
+if !has("gui_running")
+  let &t_AB="\e[48;5;%dm"
+  let &t_AF="\e[38;5;%dm"
 endif
 
 filetype plugin indent on
-syntax on
 
-" highlight all matched words on search, clear with enter key
-nnoremap <SPACE> :nohlsearch<CR><CR>
-
-map <silent><F3> :NEXTCOLOR<cr>
-map <silent><F2> :PREVCOLOR<cr>
+"map <silent><F3> :NEXTCOLOR<cr>
+"map <silent><F2> :PREVCOLOR<cr>
 
 " open NERDtree listing on the right with CTRL-n
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
 
-hi Normal ctermfg=16 ctermbg=254
+""" NERDTree settings
+"let NERDTreeMinimalUI = 1
+"let NERDTreeDirArrows = 1
+"let NERDTreeShowHidden = 0
+"let NERDTreeShowFiles = 1
+"let NERDTreeMinimalUI = 1
+"let NERDChristmasTree = 1
+"let NERDTreeChDirMode = 2
+let g:NERDTreeMouseMode = 2
+
+"let g:gitgutter_highlight_lines = 1
+let g:gitgutter_diff_args = '-w'
 
 " correctly mark json files for jsonlint
 au BufRead,BufNewFile *.json set filetype=json
@@ -86,6 +95,7 @@ let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 1
 
+set laststatus=5
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -108,8 +118,8 @@ set lazyredraw
 
 " OSX == unnamed
 " Linux == unnamedplus
-"set clipboard=unnamedplus
-set clipboard=unnamed
+set clipboard=unnamedplus
+"set clipboard=unnamed
 
 " clipboard size
 "set viminfo='100,<100,s20,h
@@ -118,19 +128,16 @@ set clipboard=unnamed
 set number
 set spell spelllang=en_us
 
-" set 256 colors
-set t_Co=256
-
-if &t_Co == 256
-    set term=xterm-256color
-    hi CursorLine ctermbg=233
-endif
-
-" disable background color erase (for tmux)
-set t_ut=
+set title                " change the terminal's title
+set visualbell           " don't beep
+set noerrorbells         " don't beep"
 
 " disable auto-commenting
+
+highlight SpecialKey ctermfg=11 ctermbg=8
+highlight Normal ctermfg=16 ctermbg=254
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -140,32 +147,23 @@ set textwidth=80
 set formatoptions+=t
 set wrap linebreak nolist
 set hlsearch
-set timeoutlen=50
+
+"set timeoutlen=50
+" Exit insert mode timeout
+set ttimeoutlen=50
+set timeout timeoutlen=1000 ttimeoutlen=100
+
 set scrolloff=10
-"set colorcolumn=78
+set colorcolumn=78
 set mousehide
 set undofile
 set undodir=~/.vim/undodir
 set cindent
 
-""" NERDTree settings
-"let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-"let NERDTreeShowHidden = 0
-"let NERDTreeShowFiles = 1
-"let NERDTreeMinimalUI = 1
-"let NERDChristmasTree = 1
-"let NERDTreeChDirMode = 2
-let g:NERDTreeMouseMode = 2
-
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 autocmd FileType sh setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 autocmd FileType Makefile setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
-
-"call togglebg#map("<F5>")
-"nmap <F8> :TagbarToggle<CR>
-call lengthmatters#highlight('ctermbg=8 ctermfg=7')
 
 scriptencoding utf-8
 
@@ -205,7 +203,6 @@ command! -nargs=? -range=% Space2Tab call IndentConvert(<line1>,<line2>,0,<q-arg
 command! -nargs=? -range=% Tab2Space call IndentConvert(<line1>,<line2>,1,<q-args>)
 command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q-args>)
 
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 augroup WhiteSpaceMatch
   " Remove ALL autocommands for the WhiteSpaceMatch group.
   autocmd!
@@ -235,13 +232,9 @@ endfunction
 
 autocmd BufWritePre * call StripTrailingWhitespace()
 
-if !has("gui_running")
-  let &t_AB="\e[48;5;%dm"
-  let &t_AF="\e[38;5;%dm"
-endif
-
-set background=dark " dark | light "
-colorscheme onedark
+call lengthmatters#highlight('ctermbg=8 ctermfg=7')
+call lengthmatters#highlight_link_to('ColorColumn')
+let g:lengthmatters_on_by_default=1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
@@ -258,3 +251,57 @@ endif
 
 autocmd FileType help setlocal nospell
 hi Search cterm=reverse
+
+let mapleader=","
+
+" GoldenView
+let g:goldenview__enable_default_mapping=0
+nmap <Leader><Leader> <plug>GoldenViewResize<CR>
+
+" Expand %% to current directory
+" http://vimcasts.org/e/14
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+
+"call togglebg#map("<F5>")
+"nmap <F8> :TagbarToggle<CR>
+
+noremap <C-d> :sh<cr>
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+if has ('autocmd') " Remain compatible with earlier versions
+ augroup vimrc     " Source vim configuration upon save
+    autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+    autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
+  augroup END
+endif " has autocmd
+
+if &t_Co > 2 || has("gui_running")
+    " switch syntax highlighting on, when the terminal has colors
+    syntax on
+endif
+
+if &t_Co >= 256 || has("gui_running")
+    hi CursorLine ctermbg=233
+
+    set term=xterm-256color
+    set t_ut=
+
+    colorscheme onedark
+endif
+
+" Use 24-bit (true-color) mode when outside tmux.
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+" highlight all matched words on search, clear with enter key
+nnoremap <SPACE> :nohlsearch<CR><CR>
+nnoremap <LEADER>w :ToggleBufExplorer<CR><CR>
+nnoremap <LEADER>h :GitGutterLineHighlightsToggle<CR><CR>
