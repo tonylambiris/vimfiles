@@ -65,10 +65,10 @@ let g:lexical#spell = 1 " 0=disabled, 1=enabled
 let g:lexical#spelllang = ['en_us',]
 let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
 
-" fix color formatting of bash scripts
-autocmd BufRead,BufNewFile *bash*.sh set filetype=sh
-au BufRead,BufNewFile *bash*,*.sh let g:is_bash=1
+" fix color formatting of certain file types
+"au BufRead,BufNewFile *bash*,*.sh let g:is_bash=1
 au BufRead,BufNewFile *bash*,*.sh setf sh
+au BufRead,BufNewFile *.pgo setf go
 
 let g:Powerline_symbols = 'fancy'
 let g:vim_markdown_folding_disabled=1
