@@ -15,8 +15,6 @@
 execute pathogen#infect()
 execute pathogen#helptags()
 
-set background=dark " dark | light "
-
 if !has("gui_running")
   let &t_AB="\e[48;5;%dm"
   let &t_AF="\e[38;5;%dm"
@@ -24,8 +22,13 @@ endif
 
 filetype plugin indent on
 
-"map <silent><F3> :NEXTCOLOR<cr>
-"map <silent><F2> :PREVCOLOR<cr>
+map <silent><F5> :COLOR<CR>
+
+set wmh=0       " set the minimum window height to 0
+
+"let g:golden_ratio_wrap_ignored = 1
+"let g:golden_ratio_exclude_nonmodifiable = 1
+"let g:golden_ratio_autocommand = 1
 
 " open NERDtree listing on the right with CTRL-n
 map <C-n> :NERDTreeToggle<CR>
@@ -36,10 +39,9 @@ let g:NERDTreeWinPos = "right"
 "let NERDTreeDirArrows = 1
 "let NERDTreeShowHidden = 0
 "let NERDTreeShowFiles = 1
-"let NERDTreeMinimalUI = 1
 "let NERDChristmasTree = 1
 "let NERDTreeChDirMode = 2
-let g:NERDTreeMouseMode = 2
+"let g:NERDTreeMouseMode = 2
 
 "let g:gitgutter_highlight_lines = 1
 let g:gitgutter_diff_args = '-w'
@@ -71,8 +73,6 @@ au BufRead,BufNewFile *bash*,*.sh setf sh
 au BufRead,BufNewFile *.pgo setf go
 
 let g:Powerline_symbols = 'fancy'
-let g:vim_markdown_folding_disabled=1
-let g:disable_markdown_autostyle = 1
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -96,7 +96,7 @@ let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 1
 
 set laststatus=5
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\
+set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -116,10 +116,8 @@ vmap <C-C> "+y"
 set ttyfast
 set lazyredraw
 
-" OSX == unnamed
-" Linux == unnamedplus
-set clipboard=unnamedplus
-"set clipboard=unnamed
+set clipboard=unnamedplus       " Linux == unnamedplus
+"set clipboard=unnamed          " OSX   == unnamed
 
 " clipboard size
 "set viminfo='100,<100,s20,h
@@ -132,19 +130,16 @@ set title                " change the terminal's title
 set visualbell           " don't beep
 set noerrorbells         " don't beep"
 
-" disable auto-commenting
-
-highlight SpecialKey ctermfg=11 ctermbg=8
-highlight Normal ctermfg=16 ctermbg=254
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+"set textwidth=0
+"set wrapmargin=0
 
 set textwidth=80
-set formatoptions+=t
+set colorcolumn=+1
+
+set formatoptions=l
+set formatoptions+=t     " disable auto-commenting
+"set wrapmargin=2
+"set wrap linebreak nolist breakat=\
 set wrap linebreak nolist
 set hlsearch
 
@@ -154,7 +149,6 @@ set ttimeoutlen=50
 set timeout timeoutlen=1000 ttimeoutlen=100
 
 set scrolloff=10
-set colorcolumn=78
 set mousehide
 set undofile
 set undodir=~/.vim/undodir
@@ -165,11 +159,21 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
 autocmd FileType sh setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 autocmd FileType Makefile setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
 
+
+
+highlight SpecialKey ctermfg=11 ctermbg=8
+highlight Normal ctermfg=16 ctermbg=254
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 scriptencoding utf-8
 
 function! Noscrollbar(...)
     let w:airline_section_z = "%{noscrollbar#statusline(10,'-','■')}"
-    "%{noscrollbar#statusline(20,'■','◫',['◧'],['◨'])}
 endfunction
 call airline#add_statusline_func('Noscrollbar')
 
@@ -235,6 +239,7 @@ autocmd BufWritePre * call StripTrailingWhitespace()
 call lengthmatters#highlight('ctermbg=8 ctermfg=7')
 call lengthmatters#highlight_link_to('ColorColumn')
 let g:lengthmatters_on_by_default=1
+let g:lengthmatters_highlight_one_column=1
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tmuxline#enabled = 0
@@ -246,7 +251,7 @@ if has("spell")
   set complete+=kspell
   hi clear SpellBad
   hi SpellBad cterm=underline ctermfg=red
-  map <f9> :set spell!<cr>
+  map <F9> :set spell!<CR>
 endif
 
 autocmd FileType help setlocal nospell
@@ -254,21 +259,17 @@ hi Search cterm=reverse
 
 let mapleader=","
 
-" GoldenView
-let g:goldenview__enable_default_mapping=0
-nmap <Leader><Leader> <plug>GoldenViewResize<CR>
-
 " Expand %% to current directory
 " http://vimcasts.org/e/14
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
+noremap %% <C-R>=expand('%:h').'/'<CR>
 
 " Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
+"nmap <leader>l :set list!<CR>
 
 "call togglebg#map("<F5>")
 "nmap <F8> :TagbarToggle<CR>
 
-noremap <C-d> :sh<cr>
+noremap <C-d> :sh<CR>
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
@@ -293,8 +294,11 @@ if &t_Co >= 256 || has("gui_running")
     set term=xterm-256color
     set t_ut=
 
-    colorscheme onedark
+    "colorscheme Benokai
+    colorscheme OceanicNext
 endif
+
+set background=dark " dark | light "
 
 " Use 24-bit (true-color) mode when outside tmux.
 if (has("termguicolors"))
@@ -302,6 +306,15 @@ if (has("termguicolors"))
 endif
 
 " highlight all matched words on search, clear with enter key
-nnoremap <SPACE> :nohlsearch<CR><CR>
-nnoremap <LEADER>w :ToggleBufExplorer<CR><CR>
-nnoremap <LEADER>h :GitGutterLineHighlightsToggle<CR><CR>
+nnoremap <silent> <space> :nohlsearch<CR><CR>
+nnoremap <silent> <leader>. :ToggleBufExplorer<CR><CR>
+nnoremap <silent> <leader>d :GitGutterLineHighlightsToggle<CR><CR>
+
+"set splitbelow
+"set splitright
+
+nnoremap <C-W>M <C-W>\| <C-W>_
+nnoremap <C-W>m <C-W>=
+
+"set winheight=30
+"set winminheight=5

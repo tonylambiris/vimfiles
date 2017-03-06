@@ -129,3 +129,9 @@
 [submodule "bundle/bufexplorer"]
 	path = bundle/bufexplorer
 	url = https://github.com/jlanzarotta/bufexplorer.git
+[submodule "bundle/vim-eighties"]
+	path = bundle/vim-eighties
+	url = https://github.com/justincampbell/vim-eighties.git
+[submodule "bundle/golden-ratio"]
+	path = bundle/golden-ratio
+	url = https://github.com/roman/golden-ratio.git
