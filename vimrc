@@ -93,7 +93,7 @@ let g:go_highlight_build_constraints = 1
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
-let g:go_fmt_fail_silently = 1
+let g:go_fmt_fail_silently = 0
 
 set laststatus=5
 set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\
@@ -306,9 +306,10 @@ if (has("termguicolors"))
 endif
 
 " highlight all matched words on search, clear with enter key
-nnoremap <silent> <space> :nohlsearch<CR><CR>
-nnoremap <silent> <leader>. :ToggleBufExplorer<CR><CR>
-nnoremap <silent> <leader>d :GitGutterLineHighlightsToggle<CR><CR>
+nnoremap <silent> <space> :nohlsearch<CR>
+nnoremap <silent> <leader>. :ToggleBufExplorer<CR>
+nnoremap <silent> <leader>m :Make<CR>
+nnoremap <silent> <leader>d :GitGutterLineHighlightsToggle<CR>
 
 "set splitbelow
 "set splitright
