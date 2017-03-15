@@ -116,6 +116,7 @@ vmap <C-C> "+y"
 set ttyfast
 set lazyredraw
 
+set guioptions+=a
 set clipboard=unnamedplus       " Linux == unnamedplus
 "set clipboard=unnamed          " OSX   == unnamed
 
