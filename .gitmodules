@@ -135,3 +135,6 @@
 [submodule "bundle/golden-ratio"]
 	path = bundle/golden-ratio
 	url = https://github.com/roman/golden-ratio.git
+[submodule "bundle/conque"]
+	path = bundle/conque
+	url = https://github.com/nicoraffo/conque.git
