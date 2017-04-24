@@ -94,6 +94,9 @@ let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 0
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
 
 set laststatus=5
 set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\
