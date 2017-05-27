@@ -22,9 +22,6 @@
 [submodule "bundle/tmuxline.vim"]
 	path = bundle/tmuxline
 	url = https://github.com/edkolev/tmuxline.vim.git
-[submodule "bundle/vim-airline"]
-	path = bundle/vim-airline
-	url = https://github.com/bling/vim-airline.git
 [submodule "bundle/vim-codefmt"]
 	path = bundle/vim-codefmt
 	url = https://github.com/google/vim-codefmt.git
@@ -43,9 +40,6 @@
 [submodule "bundle/vim-glaive"]
 	path = bundle/vim-glaive
 	url = https://github.com/google/vim-glaive.git
-[submodule "bundle/vim-go"]
-	path = bundle/vim-go
-	url = https://github.com/fatih/vim-go.git
 [submodule "bundle/vim-kolor"]
 	path = bundle/vim-kolor
 	url = https://github.com/zeis/vim-kolor.git
@@ -73,9 +67,6 @@
 [submodule "bundle/vim-ruby"]
 	path = bundle/vim-ruby
 	url = https://github.com/vim-ruby/vim-ruby.git
-[submodule "bundle/vim-sensible"]
-	path = bundle/vim-sensible
-	url = https://github.com/tpope/vim-sensible.git
 [submodule "bundle/tabular"]
 	path = bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
@@ -117,9 +108,6 @@
 [submodule "bundle/vim-lastplace"]
 	path = bundle/vim-lastplace
 	url = https://github.com/dietsche/vim-lastplace.git
-[submodule "bundle/YouCompleteMe"]
-	path = bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
 [submodule "bundle/vim-polyglot"]
 	path = bundle/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot.git

@@ -1,95 +1,52 @@
-" Adding a new pathogen module (example):
-" git submodule add https://github.com/vim-ruby/vim-ruby.git bundle/vim-ruby
-"
-" Upon initial clone and pulls:
-" git submodule update --init --recursive
-"
-" Removing a pathogen submodule:
-" git submodule deinit -f bundle/vim-submodule
-" git rm --cached bundle/vim-submodule
-"
-" NOTES:
-" sh bundle/YouCompleteMe/install.sh
-" sudo npm -g install jsonlint
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+call plug#begin('~/.vim/plugged')
 
-execute pathogen#infect()
-execute pathogen#helptags()
+Plug 'tpope/vim-sensible'
 
-if !has("gui_running")
-  let &t_AB="\e[48;5;%dm"
-  let &t_AF="\e[38;5;%dm"
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+Plug 'fatih/vim-go', { 'tag': '*', 'do': ':GoInstallBinaries' }
+
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+
+Plug 'vim-airline/vim-airline'
+
+Plug 'airblade/vim-gitgutter'
+
+Plug 'tpope/vim-fugitive'
+
+Plug 'whatyouhide/vim-lengthmatters'
+
+Plug 'ntpeters/vim-better-whitespace'
+
+"Plug 'roman/golden-ratio'
+
+Plug 'mhartington/oceanic-next'
+
+call plug#end()
+
+" ----------[ oceanic-next
+syntax enable
+if (has("termguicolors"))
+  set termguicolors " for vim 8
+else
+  set t_Co=256 " for vim 7
 endif
+colorscheme OceanicNext
 
-filetype plugin indent on
-
-map <silent><F5> :COLOR<CR>
-
-set wmh=0       " set the minimum window height to 0
-
-"let g:golden_ratio_wrap_ignored = 1
-"let g:golden_ratio_exclude_nonmodifiable = 1
-"let g:golden_ratio_autocommand = 1
-
-" open NERDtree listing on the right with CTRL-n
+" ----------[ nerdtree
 map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeWinPos = "right"
+let g:NERDTreeWinPos = 'right'
 
-""" NERDTree settings
-"let NERDTreeMinimalUI = 1
-"let NERDTreeDirArrows = 1
-"let NERDTreeShowHidden = 0
-"let NERDTreeShowFiles = 1
-"let NERDChristmasTree = 1
-"let NERDTreeChDirMode = 2
-"let g:NERDTreeMouseMode = 2
+" ----------[ vim-airline
+let g:airline_theme = 'oceanicnext'
+let g:airline_powerline_fonts = 1
 
-"let g:gitgutter_highlight_lines = 1
-let g:gitgutter_diff_args = '-w'
-
-" correctly mark json files for jsonlint
-au BufRead,BufNewFile *.json set filetype=json
-
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au WinLeave * setlocal nocursorline
-augroup END
-
-" spell checking
-augroup lexical
-  autocmd!
-  autocmd FileType markdown,mkd call lexical#init()
-  autocmd FileType textile call lexical#init()
-  autocmd FileType text call lexical#init({ 'spell': 0 })
-augroup END
-
-let g:lexical#spell = 1 " 0=disabled, 1=enabled
-let g:lexical#spelllang = ['en_us',]
-let g:spellfile_URL = 'http://ftp.vim.org/vim/runtime/spell'
-
-" fix color formatting of certain file types
-"au BufRead,BufNewFile *bash*,*.sh let g:is_bash=1
-au BufRead,BufNewFile *bash*,*.sh setf sh
-au BufRead,BufNewFile *.pgo setf go
-
-let g:Powerline_symbols = 'fancy'
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_loc_list_height=5
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-
+" ----------[ vim-go
 let g:go_list_type = "quickfix"
 let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
@@ -98,228 +55,47 @@ let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
-set laststatus=5
-set statusline+=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" ----------[ vim-lengthmatters
+call lengthmatters#highlight_link_to('TooLong')
+let g:lengthmatters_on_by_default = 1
 
-" Enable VIM mouse support
-set mouse=a
-set ttymouse=xterm2
+" ----------[ vim-gitgutter
+let g:gitgutter_diff_args = '-w' "ignore whitespace
 
-" Briefly jump to the opening bracket/paren/brace
-set showmatch
-"hi MatchParen    cterm=reverse
-
-" Control-C to copy text highlighted in mouse mode
-vmap <C-C> "+y"
-
-" Send more characters for redraws
-set ttyfast
-set lazyredraw
-
-set guioptions+=a
-set clipboard=unnamedplus       " Linux == unnamedplus
-"set clipboard=unnamed          " OSX   == unnamed
-
-" clipboard size
-"set viminfo='100,<100,s20,h
-
-" show line numbers
+" ----------[ vimrc settings
 set number
-set spell spelllang=en_us
-
-set title                " change the terminal's title
-set visualbell           " don't beep
-set noerrorbells         " don't beep"
-
-"set textwidth=0
-"set wrapmargin=0
-
+set title
+set noerrorbells
 set textwidth=80
 set colorcolumn=+1
-
-set formatoptions=l
-set formatoptions+=t     " disable auto-commenting
-"set wrapmargin=2
-"set wrap linebreak nolist breakat=\
-set wrap linebreak nolist
-set hlsearch
-
-"set timeoutlen=50
-" Exit insert mode timeout
-set ttimeoutlen=50
-set timeout timeoutlen=1000 ttimeoutlen=100
-
-set scrolloff=10
-set mousehide
+set mouse=a
+set ttymouse=xterm2
+set ttyfast
+set guioptions+=a
+set clipboard=unnamedplus
 set undofile
 set undodir=~/.vim/undodir
-set cindent
+set splitbelow
+set splitright
 
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+" highlight all matched words on search, clear highlights with space key
+nnoremap <silent><space> :nohlsearch<CR>
 
-autocmd FileType sh setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
-autocmd FileType Makefile setlocal tabstop=4 softtabstop=0 noexpandtab shiftwidth=4
+" copy highlighted text in mouse mode
+vmap <C-C> "+y"<CR>
 
+" detach to a shell in normal mode
+nmap <C-D> :sh<CR>
 
-
-highlight SpecialKey ctermfg=11 ctermbg=8
-highlight Normal ctermfg=16 ctermbg=254
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+" Map plus/minus for window sizing
+if bufwinnr(1)
+  map + <C-W>+
+  map - <C-W>-
+  map <Tab> <C-W>w
 endif
 
-scriptencoding utf-8
+" Don't expand tabs when editing Makefiles
+autocmd FileType make setlocal noexpandtab
 
-function! Noscrollbar(...)
-    let w:airline_section_z = "%{noscrollbar#statusline(10,'-','■')}"
-endfunction
-call airline#add_statusline_func('Noscrollbar')
-
-" Return indent (all whitespace at start of a line), converted from
-" tabs to spaces if what = 1, or from spaces to tabs otherwise.
-" When converting to tabs, result has no redundant spaces.
-function! Indenting(indent, what, cols)
-  let spccol = repeat(' ', a:cols)
-  let result = substitute(a:indent, spccol, '\t', 'g')
-  let result = substitute(result, ' \+\ze\t', '', 'g')
-  if a:what == 1
-    let result = substitute(result, '\t', spccol, 'g')
-  endif
-  return result
-endfunction
-
-" Convert whitespace used for indenting (before first non-whitespace).
-" what = 0 (convert spaces to tabs), or 1 (convert tabs to spaces).
-" cols = string with number of columns per tab, or empty to use 'tabstop'.
-" The cursor position is restored, but the cursor will be in a different
-" column when the number of characters in the indent of the line is changed.
-function! IndentConvert(line1, line2, what, cols)
-  let savepos = getpos('.')
-  let cols = empty(a:cols) ? &tabstop : a:cols
-  execute a:line1 . ',' . a:line2 . 's/^\s\+/\=Indenting(submatch(0), a:what, cols)/e'
-  call histdel('search', -1)
-  call setpos('.', savepos)
-endfunction
-
-command! -nargs=? -range=% Space2Tab call IndentConvert(<line1>,<line2>,0,<q-args>)
-command! -nargs=? -range=% Tab2Space call IndentConvert(<line1>,<line2>,1,<q-args>)
-command! -nargs=? -range=% RetabIndent call IndentConvert(<line1>,<line2>,&et,<q-args>)
-
-augroup WhiteSpaceMatch
-  " Remove ALL autocommands for the WhiteSpaceMatch group.
-  autocmd!
-  autocmd BufWinEnter * let w:whitespace_match_number =
-        \ matchadd('ExtraWhitespace', '\s\+$')
-  autocmd InsertEnter * call s:ToggleWhiteSpaceMatch('i')
-  autocmd InsertLeave * call s:ToggleWhiteSpaceMatch('n')
-augroup END
-
-function! s:ToggleWhiteSpaceMatch(mode)
-  let pattern = (a:mode == 'i') ? '\s\+\%#\@<!$' : '\s\+$'
-  if exists('w:whitespace_match_number')
-    call matchdelete(w:whitespace_match_number)
-    call matchadd('ExtraWhitespace', pattern, 10, w:whitespace_match_number)
-  else
-    " Something went wrong, try to be graceful.
-    let w:whitespace_match_number =  matchadd('ExtraWhitespace', pattern)
-  endif
-endfunction
-
-function! StripTrailingWhitespace()
-  normal mZ
-  let l:chars = col("$")
-  %s/\s\+$//e
-  normal `Z
-endfunction
-
-autocmd BufWritePre * call StripTrailingWhitespace()
-
-call lengthmatters#highlight('ctermbg=8 ctermfg=7')
-call lengthmatters#highlight_link_to('ColorColumn')
-let g:lengthmatters_on_by_default=1
-let g:lengthmatters_highlight_one_column=1
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tmuxline#enabled = 0
-let g:airline_powerline_fonts = 1
-let g:airline_theme='tomorrow'
-
-if has("spell")
-  set nospell
-  set complete+=kspell
-  hi clear SpellBad
-  hi SpellBad cterm=underline ctermfg=red
-  map <F9> :set spell!<CR>
-endif
-
-autocmd FileType help setlocal nospell
-hi Search cterm=reverse
-
-let mapleader=","
-
-" Expand %% to current directory
-" http://vimcasts.org/e/14
-noremap %% <C-R>=expand('%:h').'/'<CR>
-
-" Shortcut to rapidly toggle `set list`
-"nmap <leader>l :set list!<CR>
-
-"call togglebg#map("<F5>")
-"nmap <F8> :TagbarToggle<CR>
-
-noremap <C-d> :sh<CR>
-
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-
-if has ('autocmd') " Remain compatible with earlier versions
- augroup vimrc     " Source vim configuration upon save
-    autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
-    autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
-  augroup END
-endif " has autocmd
-
-if &t_Co > 2 || has("gui_running")
-    " switch syntax highlighting on, when the terminal has colors
-    syntax on
-endif
-
-if &t_Co >= 256 || has("gui_running")
-    hi CursorLine ctermbg=233
-
-    set term=xterm-256color
-    set t_ut=
-
-    "colorscheme Benokai
-    colorscheme OceanicNext
-endif
-
-set background=dark " dark | light "
-
-" Use 24-bit (true-color) mode when outside tmux.
-if (has("termguicolors"))
-  set termguicolors
-endif
-
-" highlight all matched words on search, clear with enter key
-nnoremap <silent> <space> :nohlsearch<CR>
-nnoremap <silent> <leader>. :ToggleBufExplorer<CR>
-nnoremap <silent> <leader>m :Make<CR>
-nnoremap <silent> <leader>d :GitGutterLineHighlightsToggle<CR>
-
-"set splitbelow
-"set splitright
-
-nnoremap <C-W>M <C-W>\| <C-W>_
-nnoremap <C-W>m <C-W>=
-
-"set winheight=30
-"set winminheight=5
+" Trim spurious whitespaces on save
+autocmd BufEnter * EnableStripWhitespaceOnSave
