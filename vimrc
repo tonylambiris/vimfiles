@@ -23,7 +23,7 @@ Plug 'whatyouhide/vim-lengthmatters'
 
 Plug 'ntpeters/vim-better-whitespace'
 
-"Plug 'roman/golden-ratio'
+Plug 'roman/golden-ratio'
 
 Plug 'mhartington/oceanic-next'
 
