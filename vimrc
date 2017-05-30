@@ -30,8 +30,6 @@ Plug 'mhartington/oceanic-next'
 
 Plug 'sheerun/vim-polyglot'
 
-"Plug 'rakr/vim-one'
-
 Plug 'majutsushi/tagbar'
 
 Plug 'flazz/vim-colorschemes'
@@ -111,10 +109,6 @@ autocmd BufEnter * EnableStripWhitespaceOnSave
 
 " ----------[ various settings
 set number
-set title
-set noerrorbells
-set textwidth=80
-set colorcolumn=+1
 set mouse=a
 
 set splitbelow
@@ -139,6 +133,8 @@ set backspace=indent,eol,start
 
 " Wrapping
 "set textwidth=79
+set textwidth=80
+set colorcolumn=+1
 set wrap                    " turn on line wrapping
 set wrapmargin=5            " wrap lines when coming within n characters from side
 set linebreak               " set soft wrapping
@@ -192,14 +188,13 @@ set timeout timeoutlen=1000 ttimeoutlen=100
 "                  Interface
 " =====================================
 
-" toggle invisible characters
-set list
+" toggle invisible characters off by default
+set nolist
 set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set showbreak=↪
 
 " replace the default box drawing characters
 set fillchars=vert:│,fold:─,diff:─
-
 
 " =====================================
 "                   Mappings
