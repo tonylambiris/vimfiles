@@ -218,6 +218,9 @@ nnoremap <silent> jk :noh<cr>
 " Remove search highlighting
 cnoremap <silent> jk <Esc>
 
+" Run make in current directory
+nnoremap <silent> <leader>m :make!<cr>
+
 " Toggle list symbols
 nnoremap <silent> <leader>l :set list!<cr>
 
