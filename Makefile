@@ -5,6 +5,7 @@ all: install
 install:
 	@echo "Fetching vim-plug and plug-ins..."
 	@curl -sfLo ~/.vim/autoload/plug.vim --create-dirs $(VIMPLUG)
+	@curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs $(VIMPLUG)
 	@vim -u NONE '+so ~/.vim/vimrc | PlugInstall | qall!'
 	@echo "Installation successful!"
 
