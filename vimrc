@@ -101,6 +101,9 @@ if bufwinnr(1)
   map <Tab> <C-W>w
 endif
 
+" Remember last cursor position
+autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
 " Don't expand tabs when editing Makefiles
 autocmd FileType make setlocal noexpandtab
 
