@@ -16,6 +16,8 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 Plug 'vim-airline/vim-airline'
 
+Plug 'vim-airline/vim-airline-themes'
+
 Plug 'airblade/vim-gitgutter'
 
 Plug 'tpope/vim-fugitive'
@@ -34,6 +36,8 @@ Plug 'majutsushi/tagbar'
 
 Plug 'flazz/vim-colorschemes'
 
+Plug 'KeitaNakamura/neodark.vim'
+
 "Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
@@ -51,9 +55,8 @@ if exists('g:loaded_webdevicons')
     call webdevicons#refresh()
 endif
 
-
 " ----------[ vim-airline
-let g:airline_theme = 'oceanicnext'
+let g:airline_theme = 'neodark'
 let g:airline_powerline_fonts = 1
 
 " old vim-powerline symbols
@@ -321,16 +324,14 @@ nnoremap <silent> <leader>gl :silent! Glog<cr>:bot copen<cr>
 " Toggle Tagbar
 nnoremap <silent> <leader>t :TagbarToggle<CR>
 
-let g:tagbar_ctags_bin = '/opt/local/bin/ctags'
+let g:tagbar_ctags_bin = '/usr/bin/ctags'
 
-if (empty($TMUX))
-  if (has("nvim"))
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  if (has("termguicolors"))
-    set termguicolors
-  endif
+if (has("nvim"))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+if (has("termguicolors"))
+  set termguicolors
 endif
 
 syntax enable
-colorscheme OceanicNext
+colorscheme neodark
