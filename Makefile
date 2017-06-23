@@ -4,6 +4,7 @@ all: install
 
 install:
 	@echo "Fetching vim-plug and plug-ins..."
+	@mkdir -p ~/.config/nvim ~/.local/share/nvim
 	@curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs $(VIMPLUG)
 	@nvim -u NONE '+so ~/.vim/vimrc | PlugInstall! | qall!'
 	@cp -f ycm_extra_conf.py ~/.local/share/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py
