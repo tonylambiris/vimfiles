@@ -12,4 +12,9 @@ install:
 	@ln -sf ~/.vim/vimrc ~/.config/nvim/init.vim
 	@echo "Installation successful!"
 
+update:
+	@echo "Updating vim-plug and plug-ins..."
+	@nvim -u NONE '+so ~/.vim/vimrc | PlugUpdate! | PlugUpgrade! | qall!'
+	@echo "Update successful!"
+
 .PHONY: all
