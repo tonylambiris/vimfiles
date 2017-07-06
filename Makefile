@@ -14,7 +14,7 @@ install:
 
 update:
 	@echo "Updating vim-plug and plug-ins..."
-	@nvim -u NONE '+so ~/.vim/vimrc | PlugUpdate! | qall!'
+	@nvim '+so ~/.vim/vimrc | PlugUpdate! | qall!'
 	@echo "Update successful!"
 
 .PHONY: all

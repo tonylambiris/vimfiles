@@ -12,7 +12,7 @@ Plug 'scrooloose/nerdtree'
 
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 
 Plug 'vim-airline/vim-airline'
 
