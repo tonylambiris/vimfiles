@@ -324,12 +324,11 @@ nnoremap <silent> <leader>gl :silent! Glog<cr>:bot copen<cr>
 " Toggle Tagbar
 nnoremap <silent> <leader>t :TagbarToggle<CR>
 
-let g:tagbar_ctags_bin = '/usr/bin/ctags'
-
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
-if (has("termguicolors"))
+
+if (has("termguicolors")) && &termguicolors " set true colors
   set termguicolors
 endif
 
