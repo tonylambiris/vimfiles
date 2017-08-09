@@ -34,6 +34,9 @@ Plug 'sheerun/vim-polyglot'
 
 Plug 'majutsushi/tagbar'
 
+"Plug 'ryanoasis/vim-devicons'
+
+" ----------[ vim-colorschemes
 Plug 'flazz/vim-colorschemes'
 
 Plug 'KeitaNakamura/neodark.vim'
@@ -44,7 +47,7 @@ Plug 'tyrannicaltoucan/vim-quantum'
 
 Plug 'jacoborus/tender.vim'
 
-"Plug 'ryanoasis/vim-devicons'
+Plug 'rakr/vim-one'
 
 call plug#end()
 
@@ -99,8 +102,8 @@ nnoremap <silent><space> :nohlsearch<CR>
 " copy highlighted text in mouse mode
 vmap <C-C> "+y"<CR>
 
-" detach to a shell in normal mode
-nmap <C-D> :sh<CR>
+" detach to the terminal shell
+nmap <C-D> :te<CR>
 
 " Map plus/minus for window sizing
 if bufwinnr(1)
@@ -338,7 +341,9 @@ if (has("termguicolors")) " set true colors
 endif
 
 syntax enable
+
+colorscheme neodark
 "colorscheme tender
 "colorscheme quantum
 "colorscheme material
-colorscheme neodark
+"colorscheme one
