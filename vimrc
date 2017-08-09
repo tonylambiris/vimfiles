@@ -338,4 +338,7 @@ if (has("termguicolors")) " set true colors
 endif
 
 syntax enable
+"colorscheme tender
+"colorscheme quantum
+"colorscheme material
 colorscheme neodark
