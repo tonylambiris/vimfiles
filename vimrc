@@ -38,6 +38,10 @@ Plug 'flazz/vim-colorschemes'
 
 Plug 'KeitaNakamura/neodark.vim'
 
+Plug 'jackiehluo/vim-material'
+
+Plug 'tyrannicaltoucan/vim-quantum'
+
 "Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
@@ -328,7 +332,7 @@ if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-if (has("termguicolors")) && &termguicolors " set true colors
+if (has("termguicolors")) " set true colors
   set termguicolors
 endif
 
