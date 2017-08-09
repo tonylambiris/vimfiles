@@ -42,6 +42,8 @@ Plug 'jackiehluo/vim-material'
 
 Plug 'tyrannicaltoucan/vim-quantum'
 
+Plug 'jacoborus/tender.vim'
+
 "Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
@@ -60,7 +62,6 @@ if exists('g:loaded_webdevicons')
 endif
 
 " ----------[ vim-airline
-let g:airline_theme = 'neodark'
 let g:airline_powerline_fonts = 1
 
 " old vim-powerline symbols
