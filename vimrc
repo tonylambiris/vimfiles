@@ -14,9 +14,7 @@ Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
-Plug 'vim-airline/vim-airline'
-
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 
 Plug 'airblade/vim-gitgutter'
 
@@ -49,6 +47,8 @@ Plug 'jacoborus/tender.vim'
 
 Plug 'rakr/vim-one'
 
+Plug 'yuttie/hydrangea-vim'
+
 call plug#end()
 
 " =====================================
@@ -63,18 +63,6 @@ endif
 if exists('g:loaded_webdevicons')
     call webdevicons#refresh()
 endif
-
-" ----------[ vim-airline
-let g:airline_powerline_fonts = 1
-
-" old vim-powerline symbols
-"let g:airline_left_sep = '⮀'
-"let g:airline_left_alt_sep = '⮁'
-"let g:airline_right_sep = '⮂'
-"let g:airline_right_alt_sep = '⮃'
-"let g:airline_symbols.branch = '⭠'
-"let g:airline_symbols.readonly = '⭤'
-"let g:airline_symbols.linenr = '⭡'
 
 " ----------[ nerdtree
 map <C-n> :NERDTreeToggle<CR>
@@ -306,6 +294,9 @@ let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 
 hi Directory guifg=#689d6a
 
+" Disable automatic comment insertion
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 " Close if only window open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -342,8 +333,37 @@ endif
 
 syntax enable
 
-colorscheme neodark
-"colorscheme tender
-"colorscheme quantum
-"colorscheme material
-"colorscheme one
+" The folowing colorschemes are currently available:
+" - neodark
+" - tender
+" - hydrangea
+" - quantum
+" - material
+" - one
+
+" Create colorscheme.vim in this directory with the scheme you want to use, ie:
+"let g:lightline = {
+"       \ 'colorscheme': 'hydrangea',
+"       \ 'active': {
+"       \   'left': [ ['mode', 'paste'],
+"       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
+"       \ },
+"       \ 'component': {
+"       \   'readonly': '%{&filetype=="help"?"":&readonly?"\ue0a2":""}',
+"       \   'modified': '%{&filetype=="help"?"":&modified?"\ue0a0":&modifiable?"":"-"}',
+"       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+"       \ },
+"       \ 'component_visible_condition': {
+"       \   'readonly': '(&filetype!="help"&& &readonly)',
+"       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+"       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+"       \ },
+"       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+"       \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
+"       \ }
+"colorscheme hydrangea
+
+let $COLORSCHEME = $HOME . "/.vim/colorscheme.vim"
+if filereadable($COLORSCHEME)
+  source $COLORSCHEME
+endif
