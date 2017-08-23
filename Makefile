@@ -18,6 +18,11 @@ update:
 	@nvim '+so ~/.vim/vimrc | PlugUpdate! | qall!'
 	@echo "Update successful!"
 
+clean:
+	@echo "CLeaning any unused plug-ins..."
+	@nvim '+so ~/.vim/vimrc | PlugClean! | qall!'
+	@echo "Clean successful!"
+
 remove:
 	@while [ -z "$$CONTINUE" ]; do \
 	    read -r -p "Remove vim-plug and all plug-ins? [y/N] " CONTINUE; \
