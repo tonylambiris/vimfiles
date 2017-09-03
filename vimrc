@@ -34,6 +34,8 @@ Plug 'majutsushi/tagbar'
 
 "Plug 'ryanoasis/vim-devicons'
 
+Plug 'yuttie/comfortable-motion.vim'
+
 " ----------[ vim-colorschemes
 Plug 'flazz/vim-colorschemes'
 
