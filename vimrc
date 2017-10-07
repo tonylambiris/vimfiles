@@ -1,54 +1,33 @@
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.local/share/nvim/plugged/')
 
+" Plugins
 Plug 'tpope/vim-sensible'
-
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*', 'do': ':GoInstallBinaries' }
-
-" On-demand loading
-"Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'scrooloose/nerdtree'
-
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-
+Plug 'vim-syntastic/syntastic'
 Plug 'itchyny/lightline.vim'
-
 Plug 'airblade/vim-gitgutter'
-
 Plug 'tpope/vim-fugitive'
-
 Plug 'whatyouhide/vim-lengthmatters'
-
 Plug 'ntpeters/vim-better-whitespace'
-
 Plug 'roman/golden-ratio'
-
-Plug 'mhartington/oceanic-next'
-
 Plug 'sheerun/vim-polyglot'
-
 Plug 'majutsushi/tagbar'
-
+Plug 'sjl/clam.vim'
+Plug 'yuttie/comfortable-motion.vim'
 "Plug 'ryanoasis/vim-devicons'
 
-Plug 'yuttie/comfortable-motion.vim'
-
-" ----------[ vim-colorschemes
+" Themes
 Plug 'flazz/vim-colorschemes'
-
+Plug 'mhartington/oceanic-next'
 Plug 'KeitaNakamura/neodark.vim'
-
 Plug 'jackiehluo/vim-material'
-
 Plug 'tyrannicaltoucan/vim-quantum'
-
 Plug 'jacoborus/tender.vim'
-
 Plug 'rakr/vim-one'
-
 Plug 'yuttie/hydrangea-vim'
 
 call plug#end()
@@ -57,13 +36,13 @@ call plug#end()
 "             General Configuration
 " =====================================
 if !exists('g:encoding_set') || !has('nvim')
-    set encoding=utf8
-    let g:encoding_set = 1
+	set encoding=utf8
+	let g:encoding_set = 1
 endif
 
 " after a re-source, fix syntax matching issues
 if exists('g:loaded_webdevicons')
-    call webdevicons#refresh()
+	call webdevicons#refresh()
 endif
 
 " ----------[ nerdtree
@@ -86,6 +65,24 @@ let g:lengthmatters_on_by_default = 1
 " ----------[ vim-gitgutter
 let g:gitgutter_diff_args = '-w' "ignore whitespace
 
+" ----------[ YouCompleteMe
+let g:ycm_filetype_blacklist = {
+			\ 'tagbar' : 1,
+			\ 'qf' : 1,
+			\ 'notes' : 1,
+			\ 'markdown' : 1,
+			\ 'unite' : 1,
+			\ 'text' : 1,
+			\ 'vimwiki' : 1,
+			\ 'pandoc' : 1,
+			\ 'infolog' : 1,
+			\ 'mail' : 1
+			\}
+
+" ----------[ comfortable-motion
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
+
 " highlight all matched words on search, clear highlights with space key
 nnoremap <silent><space> :nohlsearch<CR>
 
@@ -97,9 +94,9 @@ nmap <C-D> :te<CR>
 
 " Map plus/minus for window sizing
 if bufwinnr(1)
-  map + <C-W>+
-  map - <C-W>-
-  map <Tab> <C-W>w
+	map + <C-W>+
+	map - <C-W>-
+	map <Tab> <C-W>w
 endif
 
 " Remember last cursor position
@@ -204,8 +201,19 @@ set fillchars=vert:│,fold:─,diff:─
 "                   Mappings
 " =====================================
 
-" Space as leader
+" comma as leader
 let mapleader = ','
+
+" Call YCM GoTo or vim-go GoTo depending on file type.
+function! GoToDef()
+	if &ft == 'go'
+		call go#def#Jump()
+	else
+		execute 'YcmCompleter GoTo'
+	endif
+endfunction
+
+nnoremap <leader>] :call GoToDef()<CR>
 
 " Move around viewports
 nnoremap <A-h> <C-W>h
@@ -326,46 +334,21 @@ nnoremap <silent> <leader>gl :silent! Glog<cr>:bot copen<cr>
 nnoremap <silent> <leader>t :TagbarToggle<CR>
 
 if (has("nvim"))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
 if (has("termguicolors")) " set true colors
-  set termguicolors
+	set termguicolors
 endif
 
 syntax enable
 
-" The folowing colorschemes are currently available:
-" - neodark
-" - tender
-" - hydrangea
-" - quantum
-" - material
-" - one
-
-" Create colorscheme.vim in this directory with the scheme you want to use, ie:
-"let g:lightline = {
-"       \ 'colorscheme': 'hydrangea',
-"       \ 'active': {
-"       \   'left': [ ['mode', 'paste'],
-"       \             ['fugitive', 'readonly', 'filename', 'modified'] ],
-"       \ },
-"       \ 'component': {
-"       \   'readonly': '%{&filetype=="help"?"":&readonly?"\ue0a2":""}',
-"       \   'modified': '%{&filetype=="help"?"":&modified?"\ue0a0":&modifiable?"":"-"}',
-"       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-"       \ },
-"       \ 'component_visible_condition': {
-"       \   'readonly': '(&filetype!="help"&& &readonly)',
-"       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-"       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-"       \ },
-"       \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-"       \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
-"       \ }
-"colorscheme hydrangea
+let $LOCALCONFIG = $HOME . "/.vim/localconfig.vim"
+if filereadable($LOCALCONFIG)
+	source $LOCALCONFIG
+endif
 
 let $COLORSCHEME = $HOME . "/.vim/colorscheme.vim"
 if filereadable($COLORSCHEME)
-  source $COLORSCHEME
+	source $COLORSCHEME
 endif
