@@ -80,8 +80,12 @@ let g:ycm_filetype_blacklist = {
 			\}
 
 " ----------[ comfortable-motion
-let g:comfortable_motion_scroll_down_key = "j"
-let g:comfortable_motion_scroll_up_key = "k"
+let g:comfortable_motion_no_default_key_mappings = 1
+let g:comfortable_motion_impulse_multiplier = 1  " Feel free to increase/decrease this value.
+nnoremap <silent> <PageDown> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+nnoremap <silent> <PageUp> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
+noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
+noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
 
 " highlight all matched words on search, clear highlights with space key
 nnoremap <silent><space> :nohlsearch<CR>
@@ -242,6 +246,9 @@ nnoremap <silent> <leader>n :set relativenumber!<cr>
 " Make Y move like D and C
 noremap Y y$
 
+" Reformat indentation and spacing
+nnoremap <silent> <leader>r gg=G<CR>
+
 " Quickly edit init.vim
 "nnoremap <silent> <leader>ev :e ~/.config/nvim/init.vim<cr>
 
@@ -252,10 +259,10 @@ noremap Y y$
 "nnoremap <silent> <leader>ep :e ~/.config/nvim/plugins.vim<cr>
 
 " Scroll viewport
-nnoremap <PageUp> 5<C-y>
-nnoremap <PageDown> 5<C-e>
-inoremap <PageUp> <Esc>5<C-y>
-inoremap <PageDown> <Esc>5<C-e>
+"nnoremap <PageUp> 5<C-y>
+"nnoremap <PageDown> 5<C-e>
+"inoremap <PageUp> <Esc>5<C-y>
+"inoremap <PageDown> <Esc>5<C-e>
 
 " Re-highlight indented selection
 vnoremap < <gv
@@ -284,7 +291,7 @@ nnoremap <leader>/ "fyiw :/<c-r>f<cr>
 "let g:webdevicons_enable = 1
 
 " Toggle NerdTree
-nnoremap <silent> <leader>k :NERDTreeToggle<cr>
+"nnoremap <silent> <leader>k :NERDTreeToggle<cr>
 
 " Show hidden files
 let NERDTreeShowHidden = 1
