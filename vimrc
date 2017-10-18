@@ -18,6 +18,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'majutsushi/tagbar'
 Plug 'sjl/clam.vim'
 Plug 'yuttie/comfortable-motion.vim'
+Plug 'romainl/vim-qf'
 "Plug 'ryanoasis/vim-devicons'
 
 " Themes
@@ -63,7 +64,21 @@ call lengthmatters#highlight_link_to('TooLong')
 let g:lengthmatters_on_by_default = 1
 
 " ----------[ vim-gitgutter
-let g:gitgutter_diff_args = '-w' "ignore whitespace
+" nnoremap <leader>d :GitGutterLineHighlightsToggle -v -q<cr>
+nmap <C-D> :GitGutterLineHighlightsToggle<CR>
+let g:gitgutter_diff_args = '-w' " ignore whitespace
+let g:gitgutter_grep_command = 'ag'
+let g:gitgutter_max_signs = 500
+let g:gitgutter_map_keys = 0
+
+" ----------[ golden-ratio
+let g:golden_ratio_autocommand = 0
+let g:golden_ratio_exclude_nonmodifiable = 1
+
+" ----------[ clam.vim
+nnoremap ! :Clam<space>
+vnoremap ! :ClamVisual<space>
+let g:clam_winpos = 'botright'
 
 " ----------[ YouCompleteMe
 let g:ycm_filetype_blacklist = {
@@ -80,12 +95,12 @@ let g:ycm_filetype_blacklist = {
 			\}
 
 " ----------[ comfortable-motion
-let g:comfortable_motion_no_default_key_mappings = 1
-let g:comfortable_motion_impulse_multiplier = 1  " Feel free to increase/decrease this value.
-nnoremap <silent> <PageDown> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
-nnoremap <silent> <PageUp> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
+nnoremap <silent> <silent> <PageDown> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+nnoremap <silent> <silent> <PageUp> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
 noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
 noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
+let g:comfortable_motion_no_default_key_mappings = 1
+let g:comfortable_motion_impulse_multiplier = 1  " Feel free to increase/decrease this value.
 
 " highlight all matched words on search, clear highlights with space key
 nnoremap <silent><space> :nohlsearch<CR>
@@ -94,7 +109,7 @@ nnoremap <silent><space> :nohlsearch<CR>
 vmap <C-C> "+y"<CR>
 
 " detach to the terminal shell
-nmap <C-D> :te<CR>
+"nmap <C-D> :te<CR>
 
 " Map plus/minus for window sizing
 if bufwinnr(1)
@@ -120,6 +135,8 @@ set splitbelow
 set splitright
 
 set background=dark
+
+set signcolumn=yes
 
 " Let vim use the system clipboard
 set clipboard^=unnamedplus,unnamed
@@ -209,15 +226,18 @@ set fillchars=vert:│,fold:─,diff:─
 let mapleader = ','
 
 " Call YCM GoTo or vim-go GoTo depending on file type.
-function! GoToDef()
-	if &ft == 'go'
-		call go#def#Jump()
-	else
-		execute 'YcmCompleter GoTo'
-	endif
-endfunction
+"function! GoToDef()
+"	if &ft == 'go'
+"		call go#def#Jump()
+"	else
+"		execute 'YcmCompleter GoTo'
+"	endif
+"endfunction
 
 nnoremap <leader>] :call GoToDef()<CR>
+
+" Display all leaders
+nnoremap <silent> <leader>m :map ,<CR>
 
 " Move around viewports
 nnoremap <A-h> <C-W>h
@@ -235,7 +255,7 @@ nnoremap <silent> jk :noh<cr>
 cnoremap <silent> jk <Esc>
 
 " Run make in current directory
-nnoremap <silent> <leader>m :make!<cr>
+"nnoremap <silent> <leader>m :make!<cr>
 
 " Toggle list symbols
 nnoremap <silent> <leader>l :set list!<cr>
@@ -254,6 +274,9 @@ nnoremap <silent> <leader>r gg=G<CR>
 
 " Source init.vim
 "nnoremap <silent> <leader>sv :so ~/.config/nvim/init.vim<cr>
+
+" Source init.vim
+nnoremap <silent> <leader>s :so ~/.config/nvim/init.vim<cr>
 
 " Quickly edit plugins
 "nnoremap <silent> <leader>ep :e ~/.config/nvim/plugins.vim<cr>
@@ -291,7 +314,7 @@ nnoremap <leader>/ "fyiw :/<c-r>f<cr>
 "let g:webdevicons_enable = 1
 
 " Toggle NerdTree
-"nnoremap <silent> <leader>k :NERDTreeToggle<cr>
+nnoremap <silent> <leader>k :NERDTreeToggle<cr>
 
 " Show hidden files
 let NERDTreeShowHidden = 1
