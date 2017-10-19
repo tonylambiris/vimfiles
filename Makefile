@@ -1,6 +1,5 @@
 VIMPLUG?=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-all:
 all: install theme
 
 reinstall: remove all
@@ -34,6 +33,7 @@ remove:
 		rm -rf ~/.config/nvim ~/.local/share/nvim; \
 		fi
 
+# find ~/.local/share/nvim -name 'colors' | xargs ls *.vim
 theme: themecheck
 	@sed -re "s|%COLORSCHEME%|$(COLORSCHEME)|g" colorscheme.vim.in > colorscheme.vim
 	@echo "Successfully set colorscheme to $(COLORSCHEME)!"
