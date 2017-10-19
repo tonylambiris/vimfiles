@@ -65,6 +65,11 @@ let g:lengthmatters_on_by_default = 1
 
 " ----------[ vim-gitgutter
 " nnoremap <leader>d :GitGutterLineHighlightsToggle -v -q<cr>
+if exists('&signcolumn')  " Vim 7.4.2201
+  set signcolumn=yes
+else
+  let g:gitgutter_sign_column_always = 1
+endif
 nmap <C-D> :GitGutterLineHighlightsToggle<CR>
 let g:gitgutter_diff_args = '-w' " ignore whitespace
 let g:gitgutter_grep_command = 'ag'
@@ -135,8 +140,6 @@ set splitbelow
 set splitright
 
 set background=dark
-
-set signcolumn=yes
 
 " Let vim use the system clipboard
 set clipboard^=unnamedplus,unnamed
