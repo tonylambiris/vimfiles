@@ -6,7 +6,7 @@ Plug 'tpope/vim-sensible'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-compiler' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'vim-syntastic/syntastic'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
