@@ -64,11 +64,11 @@ call lengthmatters#highlight_link_to('TooLong')
 let g:lengthmatters_on_by_default = 1
 
 " ----------[ vim-gitgutter
-" nnoremap <leader>d :GitGutterLineHighlightsToggle -v -q<cr>
+" nnoremap <leader>d :GitGutterLineHighlightsToggle -v -q<CR>
 if exists('&signcolumn')  " Vim 7.4.2201
-  set signcolumn=yes
+	set signcolumn=yes
 else
-  let g:gitgutter_sign_column_always = 1
+	let g:gitgutter_sign_column_always = 1
 endif
 nmap <C-D> :GitGutterLineHighlightsToggle<CR>
 let g:gitgutter_diff_args = '-w' " ignore whitespace
@@ -86,18 +86,19 @@ vnoremap ! :ClamVisual<space>
 let g:clam_winpos = 'botright'
 
 " ----------[ YouCompleteMe
+"let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
 let g:ycm_filetype_blacklist = {
-			\ 'tagbar' : 1,
-			\ 'qf' : 1,
-			\ 'notes' : 1,
-			\ 'markdown' : 1,
-			\ 'unite' : 1,
-			\ 'text' : 1,
-			\ 'vimwiki' : 1,
-			\ 'pandoc' : 1,
-			\ 'infolog' : 1,
-			\ 'mail' : 1
-			\}
+		\ 'tagbar' : 1,
+		\ 'qf' : 1,
+		\ 'notes' : 1,
+		\ 'markdown' : 1,
+		\ 'unite' : 1,
+		\ 'text' : 1,
+		\ 'vimwiki' : 1,
+		\ 'pandoc' : 1,
+		\ 'infolog' : 1,
+		\ 'mail' : 1
+		\  }
 
 " ----------[ comfortable-motion
 nnoremap <silent> <silent> <PageDown> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
@@ -228,17 +229,6 @@ set fillchars=vert:│,fold:─,diff:─
 " comma as leader
 let mapleader = ','
 
-" Call YCM GoTo or vim-go GoTo depending on file type.
-"function! GoToDef()
-"	if &ft == 'go'
-"		call go#def#Jump()
-"	else
-"		execute 'YcmCompleter GoTo'
-"	endif
-"endfunction
-
-nnoremap <leader>] :call GoToDef()<CR>
-
 " Display all leaders
 nnoremap <silent> <leader>m :map ,<CR>
 
@@ -252,19 +242,19 @@ nnoremap <A-l> <C-W>l
 inoremap jk <Esc>
 
 " Remove search highlighting
-nnoremap <silent> jk :noh<cr>
+nnoremap <silent> jk :noh<CR>
 
 " Remove search highlighting
 cnoremap <silent> jk <Esc>
 
 " Run make in current directory
-"nnoremap <silent> <leader>m :make!<cr>
+"nnoremap <silent> <leader>m :make!<CR>
 
 " Toggle list symbols
-nnoremap <silent> <leader>l :set list!<cr>
+nnoremap <silent> <leader>l :set list!<CR>
 
 " Toggle relative numbers
-nnoremap <silent> <leader>n :set relativenumber!<cr>
+nnoremap <silent> <leader>n :set relativenumber!<CR>
 
 " Make Y move like D and C
 noremap Y y$
@@ -273,16 +263,16 @@ noremap Y y$
 nnoremap <silent> <leader>r gg=G<CR>
 
 " Quickly edit init.vim
-"nnoremap <silent> <leader>ev :e ~/.config/nvim/init.vim<cr>
+"nnoremap <silent> <leader>ev :e ~/.config/nvim/init.vim<CR>
 
 " Source init.vim
-"nnoremap <silent> <leader>sv :so ~/.config/nvim/init.vim<cr>
+"nnoremap <silent> <leader>sv :so ~/.config/nvim/init.vim<CR>
 
 " Source init.vim
-nnoremap <silent> <leader>s :so ~/.config/nvim/init.vim<cr>
+nnoremap <silent> <leader>s :so ~/.config/nvim/init.vim<CR>
 
 " Quickly edit plugins
-"nnoremap <silent> <leader>ep :e ~/.config/nvim/plugins.vim<cr>
+"nnoremap <silent> <leader>ep :e ~/.config/nvim/plugins.vim<CR>
 
 " Scroll viewport
 "nnoremap <PageUp> 5<C-y>
@@ -307,7 +297,7 @@ nnoremap <silent> g* g*zz
 nnoremap <silent> g# g#zz
 
 " Search for word under cursor
-nnoremap <leader>/ "fyiw :/<c-r>f<cr>
+nnoremap <leader>/ "fyiw :/<c-r>f<CR>
 
 " =====================================
 "               Plugin: NERDTree
@@ -317,7 +307,7 @@ nnoremap <leader>/ "fyiw :/<c-r>f<cr>
 "let g:webdevicons_enable = 1
 
 " Toggle NerdTree
-nnoremap <silent> <leader>k :NERDTreeToggle<cr>
+nnoremap <silent> <leader>k :NERDTreeToggle<CR>
 
 " Show hidden files
 let NERDTreeShowHidden = 1
@@ -348,16 +338,16 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " =====================================
 
 " git status
-nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gs :Gstatus<CR>
 
 " git add .
-nnoremap <leader>ga :Git add .<cr><cr>
+nnoremap <leader>ga :Git add .<CR><CR>
 
 " git commit -v -q - verbose and quiet
-nnoremap <leader>gc :Gcommit -v -q<cr>
+nnoremap <leader>gc :Gcommit -v -q<CR>
 
 " git log - opens in quickfix windows to navigate to commits
-nnoremap <silent> <leader>gl :silent! Glog<cr>:bot copen<cr>
+nnoremap <silent> <leader>gl :silent! Glog<CR>:bot copen<CR>
 
 " =====================================
 "                Plugin: Tagbar
