@@ -27,9 +27,11 @@ Plug 'mhartington/oceanic-next'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'jackiehluo/vim-material'
 Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'jacoborus/tender.vim'
 Plug 'rakr/vim-one'
 Plug 'yuttie/hydrangea-vim'
+Plug 'joshdick/onedark.vim'
 
 call plug#end()
 
