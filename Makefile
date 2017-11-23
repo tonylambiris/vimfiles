@@ -36,7 +36,7 @@ remove:
 
 # find ~/.local/share/nvim -name 'colors' | xargs ls *.vim
 theme: themecheck
-	@sed -re "s|%COLORSCHEME%|$(COLORSCHEME)|g" colorscheme.vim.in > colorscheme.vim
+	@sed -e "s|%COLORSCHEME%|$(COLORSCHEME)|g" colorscheme.vim.in > colorscheme.vim
 	@echo "Successfully set colorscheme to $(COLORSCHEME)!"
 
 themecheck:
