@@ -32,6 +32,9 @@ Plug 'jacoborus/tender.vim'
 Plug 'rakr/vim-one'
 Plug 'yuttie/hydrangea-vim'
 Plug 'joshdick/onedark.vim'
+Plug 'nightsense/seabird'
+Plug 'trevordmiller/nova-vim'
+Plug 'sonph/onehalf'
 
 call plug#end()
 
@@ -364,6 +367,10 @@ endif
 
 if (has("termguicolors")) " set true colors
 	set termguicolors
+endif
+
+if (has("guicursor"))
+	set guicursor
 endif
 
 syntax enable
