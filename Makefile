@@ -34,17 +34,25 @@ remove:
 		rm -rf ~/.config/nvim ~/.local/share/nvim; \
 		fi
 
-# find ~/.local/share/nvim -name 'colors' | xargs ls *.vim
+themes:
+	@echo "Available themes:"
+	@find ~/.local/share/nvim -type d -name colors -exec find "{}" -type f -name '*.vim' \; | xargs -n 1 basename | cut -d '.' -f 1 | sort -u | column
+	@echo
+	@echo "Available lightline colorschemes:"
+	@find ~/.local/share/nvim -type d -name colorscheme -exec find "{}" -type f -name '*.vim' \; | xargs -n 1 basename | cut -d '.' -f 1 | sort -u | column
+
 theme: themecheck
 	@sed -e "s|%COLORSCHEME%|$(COLORSCHEME)|g" colorscheme.vim.in > colorscheme.vim
 	@echo "Successfully set colorscheme to $(COLORSCHEME)!"
 
 themecheck:
+	@echo "Available themes can be listed by runnning: make themes"
+	@echo
 ifeq ($(COLORSCHEME),)
+	@echo "Themes can be changed by running: make COLORSCHEME=<somescheme> theme"
 	@echo
-	@echo "Themes can be changed by running the following:"
-	@echo "make COLORSCHEME=<somescheme> theme"
-	@echo
+else
+	@find ~/.local/share/nvim -type d -name colors -exec find "{}" -type f -name '*.vim' \; | xargs -n 1 basename | cut -d '.' -f 1 | sort -u | grep -q $(COLORSCHEME)
 endif
 COLORSCHEME?=hydrangea
 
