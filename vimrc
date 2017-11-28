@@ -5,6 +5,8 @@ call plug#begin('~/.local/share/nvim/plugged/')
 Plug 'tpope/vim-sensible'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'scrooloose/nerdtree'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'vim-syntastic/syntastic'
@@ -19,7 +21,9 @@ Plug 'majutsushi/tagbar'
 Plug 'sjl/clam.vim'
 Plug 'yuttie/comfortable-motion.vim'
 Plug 'romainl/vim-qf'
-"Plug 'ryanoasis/vim-devicons'
+Plug 'taohex/lightline-buffer'
+Plug 'ryanoasis/vim-devicons'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Themes
 Plug 'flazz/vim-colorschemes'
@@ -40,6 +44,7 @@ Plug 'dim13/smyck.vim'
 Plug 'nightsense/carbonized'
 Plug 'Drogglbecher/vim-moonscape'
 Plug 'arcticicestudio/nord-vim'
+Plug 'cocopon/iceberg.vim'
 
 call plug#end()
 
@@ -56,9 +61,36 @@ if exists('g:loaded_webdevicons')
 	call webdevicons#refresh()
 endif
 
+" ----------[ vim-filer
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_tree_leaf_icon = " "
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '✓'
+let g:vimfiler_readonly_file_icon = '✗'
+let g:vimfiler_time_format = '%m-%d-%y %H:%M:%S'
+let g:vimfiler_expand_jump_to_first_child = 0
+let g:vimfiler_ignore_pattern = '\.git\|\.DS_Store\|\.pyc'
+
+call vimfiler#custom#profile('default', 'context', {
+			\ 'safe' : 0,
+			\ 'direction' : 'rightbelow',
+			\ 'edit_action' : 'tabopen',
+			\ })
+
+"map <silent> <C-n> :VimFilerExplorer<CR>
+
 " ----------[ nerdtree
-map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = 'right'
+let g:NERDTreeQuitOnOpen = 1
+
+map <silent> <C-n> :NERDTreeToggle<CR>
+"autocmd FileType nerdtree nmap <buffer> <CR> t
+
+" ----------[ ctrlp.vim
+let g:ctrlp_cmd = 'CtrlPBuffer'
 
 " ----------[ vim-go
 let g:go_list_type = "quickfix"
@@ -70,17 +102,18 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 
 " ----------[ vim-lengthmatters
-call lengthmatters#highlight_link_to('TooLong')
 let g:lengthmatters_on_by_default = 1
 
+call lengthmatters#highlight_link_to('TooLong')
+
 " ----------[ vim-gitgutter
-" nnoremap <leader>d :GitGutterLineHighlightsToggle -v -q<CR>
+nmap <silent> <C-d> :GitGutterLineHighlightsToggle<CR>
+
 if exists('&signcolumn')  " Vim 7.4.2201
 	set signcolumn=yes
 else
 	let g:gitgutter_sign_column_always = 1
 endif
-nmap <C-D> :GitGutterLineHighlightsToggle<CR>
 let g:gitgutter_diff_args = '-w' " ignore whitespace
 let g:gitgutter_grep_command = 'ag'
 let g:gitgutter_max_signs = 500
@@ -93,7 +126,7 @@ let g:golden_ratio_exclude_nonmodifiable = 1
 " ----------[ clam.vim
 nnoremap ! :Clam<space>
 vnoremap ! :ClamVisual<space>
-let g:clam_winpos = 'botright'
+"let g:clam_winpos = 'vertical botright'
 
 " ----------[ YouCompleteMe
 "let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
@@ -110,16 +143,67 @@ let g:ycm_filetype_blacklist = {
 			\ 'mail' : 1
 			\ }
 
+" ----------[ lightline
+let g:lightline = {
+			\ 'active': {
+			\   'left': [ [ 'mode', 'paste' ],
+			\             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
+			\ },
+			\ 'tabline': {
+			\   'left': [ [ 'bufferinfo' ],
+			\             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ] ],
+			\   'right': [ [ 'close' ] ],
+			\ },
+			\ 'component_expand': {
+			\   'buffercurrent': 'lightline#buffer#buffercurrent',
+			\   'bufferbefore': 'lightline#buffer#bufferbefore',
+			\   'bufferafter': 'lightline#buffer#bufferafter',
+			\ },
+			\ 'component_type': {
+			\   'buffercurrent': 'tabsel',
+			\   'bufferbefore': 'raw',
+			\   'bufferafter': 'raw',
+			\ },
+			\ 'component_function': {
+			\   'bufferinfo': 'lightline#buffer#bufferinfo',
+			\   'gitbranch': 'fugitive#head',
+			\ },
+			\ 'component': {
+			\   'readonly': '%{&filetype=="help"?"":&readonly?"\ue0a2":""}',
+			\   'modified': '%{&filetype=="help"?"":&modified?"\ue0a0":&modifiable?"":"-"}',
+			\   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+			\ },
+			\ 'component_visible_condition': {
+			\   'readonly': '(&filetype!="help"&& &readonly)',
+			\   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+			\   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())',
+			\ },
+			\ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+			\ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+			\ }
+
+" lightline-buffer ui settings
+" replace these symbols with ascii characters if your environment does not support unicode
+let g:lightline_buffer_logo = ' '
+
+" lightline-buffer function settings
+let g:lightline_buffer_show_bufnr = 0
+
+" Remap arrow keys for buffer switching
+nnoremap <silent> <S-Left> :bprev<CR>
+nnoremap <silent> <S-Right> :bnext<CR>
+
 " ----------[ comfortable-motion
-nnoremap <silent> <silent> <PageDown> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
-nnoremap <silent> <silent> <PageUp> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
-noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(40)<CR>
-noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-40)<CR>
 let g:comfortable_motion_no_default_key_mappings = 1
 let g:comfortable_motion_impulse_multiplier = 1  " Feel free to increase/decrease this value.
 
+nnoremap <silent> <PageUp> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -2)<CR>
+nnoremap <silent> <PageDown> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 2)<CR>
+nnoremap <silent> <ScrollWheelUp> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * -1)<CR>
+nnoremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier * winheight(0) * 1)<CR>
+
 " highlight all matched words on search, clear highlights with space key
-nnoremap <silent><space> :nohlsearch<CR>
+nnoremap <silent> <space> :nohlsearch<CR>
 
 " copy highlighted text in mouse mode
 vmap <C-C> "+y"<CR>
@@ -131,6 +215,7 @@ vmap <C-C> "+y"<CR>
 if bufwinnr(1)
 	map + <C-W>+
 	map - <C-W>-
+	map = <C-W>=
 	map <Tab> <C-W>w
 endif
 
@@ -150,6 +235,7 @@ autocmd BufEnter * EnableStripWhitespaceOnSave
 " ----------[ various settings
 set number
 set mouse=a
+set mousehide
 
 set splitbelow
 set splitright
@@ -159,7 +245,7 @@ set background=dark
 " Let vim use the system clipboard
 set clipboard^=unnamedplus,unnamed
 
-" turn on undo files, put them in a common location
+" Turn on undo files, put them in a common location
 set undofile
 set undodir=~/.vim/undo/
 
@@ -194,15 +280,14 @@ set shiftround              " round indent to a multiple of 'shiftwidth'
 
 " Misc.
 set ttyfast                 " faster redrawing
-set showtabline=2           " show tabs for lightline
+set showtabline=2           " always show tabline
 set laststatus=2            " show the status line all the time
 set cursorline              " highlight the current line
-set so=7                    " set 7 lines to the cursors - when moving vertical
 set wildmenu                " enhanced command line completion
 set showcmd                 " show incomplete commands
 set noshowmode              " don't show which mode disabled for PowerLine
 set wildmode=list:longest   " complete files like a shell
-set scrolloff=3             " lines of text around cursor
+set scrolloff=10            " lines of text around cursor
 set shell=$SHELL
 set cmdheight=1             " command bar height
 set title                   " set terminal title
@@ -246,13 +331,13 @@ set fillchars=vert:│,fold:─,diff:─
 let mapleader = ','
 
 " Display all leaders
-nnoremap <silent> <leader>m :map ,<CR>
+nnoremap <silent> <leader>, :map ,<CR>
 
 " Move around viewports
-nnoremap <A-h> <C-W>h
-nnoremap <A-j> <C-W>j
-nnoremap <A-k> <C-W>k
-nnoremap <A-l> <C-W>l
+"nnoremap <M-h> <C-W>h
+"nnoremap <M-j> <C-W>j
+"nnoremap <M-k> <C-W>k
+"nnoremap <M-l> <C-W>l
 
 " Handy remap to get out of insert mode
 inoremap jk <Esc>
@@ -264,7 +349,7 @@ nnoremap <silent> jk :noh<CR>
 cnoremap <silent> jk <Esc>
 
 " Run make in current directory
-"nnoremap <silent> <leader>m :make!<CR>
+nnoremap <silent> <leader>m :make!<CR>
 
 " Toggle list symbols
 nnoremap <silent> <leader>l :set list!<CR>
@@ -277,9 +362,10 @@ noremap Y y$
 
 " Reformat indentation and spacing
 nnoremap <silent> <leader>r gg=G<CR>
+"nnoremap <silent> <leader>r :retab <CR>
 
 " Quickly edit init.vim
-"nnoremap <silent> <leader>ev :e ~/.config/nvim/init.vim<CR>
+nnoremap <silent> <leader>e :e ~/.config/nvim/init.vim<CR>
 
 " Source init.vim
 "nnoremap <silent> <leader>sv :so ~/.config/nvim/init.vim<CR>
@@ -323,14 +409,14 @@ nnoremap <leader>/ "fyiw :/<c-r>f<CR>
 "let g:webdevicons_enable = 1
 
 " Toggle NerdTree
-nnoremap <silent> <leader>k :NERDTreeToggle<CR>
+"nnoremap <silent> <leader>k :NERDTreeToggle<CR>
 
 " Show hidden files
-let NERDTreeShowHidden = 1
+"let g:NERDTreeShowHidden = 1
 
 "webdevicons图标
-"let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-"let g:WebDevIconsUnicodeDecorateFolderNodeDefaultSymbol = ''
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:WebDevIconsUnicodeDecorateFolderNodeDefaultSymbol = ''
 
 " let g:NERDTreeFileExtensionHighlightFullName = 1
 " let g:NERDTreeExactMatchHighlightFullName = 1
@@ -338,8 +424,8 @@ let NERDTreeShowHidden = 1
 
 "let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
 
-let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
-let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+"let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
+"let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 
 hi Directory guifg=#689d6a
 
@@ -355,6 +441,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " git status
 nnoremap <leader>gs :Gstatus<CR>
+
+" git diff
+nnoremap <leader>gd :Gdiff<CR>
 
 " git add .
 nnoremap <leader>ga :Git add .<CR><CR>
