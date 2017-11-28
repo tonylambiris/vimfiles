@@ -34,7 +34,12 @@ Plug 'yuttie/hydrangea-vim'
 Plug 'joshdick/onedark.vim'
 Plug 'nightsense/seabird'
 Plug 'trevordmiller/nova-vim'
-Plug 'sonph/onehalf'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'Badacadabra/vim-archery'
+Plug 'dim13/smyck.vim'
+Plug 'nightsense/carbonized'
+Plug 'Drogglbecher/vim-moonscape'
+Plug 'arcticicestudio/nord-vim'
 
 call plug#end()
 
@@ -129,6 +134,10 @@ if bufwinnr(1)
 	map <Tab> <C-W>w
 endif
 
+" Only Highlight the current line in the active window
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+
 " Remember last cursor position
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
@@ -185,7 +194,9 @@ set shiftround              " round indent to a multiple of 'shiftwidth'
 
 " Misc.
 set ttyfast                 " faster redrawing
-set laststatus=2            " show the satus line all the time
+set showtabline=2           " show tabs for lightline
+set laststatus=2            " show the status line all the time
+set cursorline              " highlight the current line
 set so=7                    " set 7 lines to the cursors - when moving vertical
 set wildmenu                " enhanced command line completion
 set showcmd                 " show incomplete commands
