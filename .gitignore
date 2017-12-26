@@ -1,3 +1,4 @@
 undo/
 colorscheme.vim
 localconfig.vim
+*.bak
