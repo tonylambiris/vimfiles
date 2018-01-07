@@ -3,12 +3,14 @@ call plug#begin('~/.local/share/nvim/plugged/')
 
 " Plugins
 Plug 'tpope/vim-sensible'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'vim-syntastic/syntastic'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
@@ -24,6 +26,7 @@ Plug 'romainl/vim-qf'
 Plug 'taohex/lightline-buffer'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'fidian/hexmode'
 
 " Themes
 Plug 'flazz/vim-colorschemes'
@@ -128,20 +131,23 @@ nnoremap ! :Clam<space>
 vnoremap ! :ClamVisual<space>
 "let g:clam_winpos = 'vertical botright'
 
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+
 " ----------[ YouCompleteMe
 "let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
-let g:ycm_filetype_blacklist = {
-			\ 'tagbar' : 1,
-			\ 'qf' : 1,
-			\ 'notes' : 1,
-			\ 'markdown' : 1,
-			\ 'unite' : 1,
-			\ 'text' : 1,
-			\ 'vimwiki' : 1,
-			\ 'pandoc' : 1,
-			\ 'infolog' : 1,
-			\ 'mail' : 1
-			\ }
+"let g:ycm_filetype_blacklist = {
+"			\ 'tagbar' : 1,
+"			\ 'qf' : 1,
+"			\ 'notes' : 1,
+"			\ 'markdown' : 1,
+"			\ 'unite' : 1,
+"			\ 'text' : 1,
+"			\ 'vimwiki' : 1,
+"			\ 'pandoc' : 1,
+"			\ 'infolog' : 1,
+"			\ 'mail' : 1
+"			\ }
 
 " ----------[ lightline
 let g:lightline = {
@@ -210,6 +216,9 @@ vmap <C-C> "+y"<CR>
 
 " detach to the terminal shell
 "nmap <C-D> :te<CR>
+
+" view in hexmode
+map <silent> <C-h> :Hexmode<CR>
 
 " Map plus/minus for window sizing
 if bufwinnr(1)
