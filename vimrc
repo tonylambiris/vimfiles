@@ -3,14 +3,13 @@ call plug#begin('~/.local/share/nvim/plugged/')
 
 " Plugins
 Plug 'tpope/vim-sensible'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
 Plug 'vim-syntastic/syntastic'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
@@ -239,7 +238,9 @@ autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 
 autocmd FileType make setlocal noexpandtab
 
 " Trim spurious whitespaces on save
-autocmd BufEnter * EnableStripWhitespaceOnSave
+if exists('g:better_whitespace_enabled')
+	autocmd BufEnter * EnableStripWhitespaceOnSave
+endif
 
 " ----------[ various settings
 set number

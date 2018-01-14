@@ -8,21 +8,18 @@ install:
 	@echo "Fetching vim-plug and plug-ins..."
 	@mkdir -p ~/.config/nvim ~/.local/share/nvim
 	@curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs $(VIMPLUG)
-	@nvim -u NONE '+so ~/.vim/vimrc | PlugInstall! | qall!'
-	@cp -f ycm_extra_conf.py ~/.local/share/nvim/plugged/YouCompleteMe/.ycm_extra_conf.py
-	@if ! grep -q .ycm_extra_conf.py ~/.local/share/nvim/plugged/YouCompleteMe/.git/info/exclude; \
-		then echo .ycm_extra_conf.py >> ~/.local/share/nvim/plugged/YouCompleteMe/.git/info/exclude; fi
+	@nvim -u NORC '+so ~/.vim/vimrc | PlugInstall! | qall!'
 	@ln -sf ~/.vim/vimrc ~/.config/nvim/init.vim
 	@echo "Installation successful!"
 
 update:
 	@echo "Updating vim-plug and plug-ins..."
-	@nvim '+so ~/.vim/vimrc | PlugUpdate! | qall!'
+	@nvim -u NORC '+so ~/.vim/vimrc | PlugUpdate! | qall!'
 	@echo "Update successful!"
 
 clean:
 	@echo "Cleaning any unused plug-ins..."
-	@nvim '+so ~/.vim/vimrc | PlugClean! | qall!'
+	@nvim -u NORC '+so ~/.vim/vimrc | PlugClean! | qall!'
 	@echo "Clean successful!"
 
 remove:
