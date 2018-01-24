@@ -238,9 +238,13 @@ autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 
 autocmd FileType make setlocal noexpandtab
 
 " Trim spurious whitespaces on save
-if exists('g:better_whitespace_enabled')
-	autocmd BufEnter * EnableStripWhitespaceOnSave
-endif
+" enable both features globally
+let g:better_whitespace_enabled = 1
+let g:strip_whitespace_on_save = 1
+" blacklist without markdown
+let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help']
+" disable stripping for markdown files
+autocmd FileType markdown DisableStripWhitespaceOnSave
 
 " ----------[ various settings
 set number
