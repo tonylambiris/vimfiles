@@ -1,6 +1,6 @@
 VIMPLUG?=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-all: install theme
+all: install update theme
 
 reinstall: remove all
 
@@ -12,7 +12,7 @@ install:
 	@ln -sf ~/.vim/vimrc ~/.config/nvim/init.vim
 	@echo "Installation successful!"
 
-update:
+update: clean
 	@echo "Updating vim-plug and plug-ins..."
 	@nvim -u NORC '+so ~/.vim/vimrc | PlugUpdate! | qall!'
 	@echo "Update successful!"
@@ -43,6 +43,7 @@ theme: themecheck
 	@echo "Successfully set colorscheme to $(COLORSCHEME)!"
 
 themecheck:
+	@echo
 	@echo "Available themes can be listed by runnning: make themes"
 	@echo
 ifeq ($(COLORSCHEME),)
