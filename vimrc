@@ -47,6 +47,7 @@ Plug 'nightsense/carbonized'
 Plug 'Drogglbecher/vim-moonscape'
 Plug 'arcticicestudio/nord-vim'
 Plug 'cocopon/iceberg.vim'
+Plug 'carlson-erik/wolfpack'
 
 call plug#end()
 
