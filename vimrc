@@ -48,6 +48,8 @@ Plug 'Drogglbecher/vim-moonscape'
 Plug 'arcticicestudio/nord-vim'
 Plug 'cocopon/iceberg.vim'
 Plug 'carlson-erik/wolfpack'
+Plug 'whatyouhide/vim-gotham'
+Plug 'nightsense/vim-crunchbang'
 
 call plug#end()
 
