@@ -40,13 +40,14 @@ themes:
 
 theme: themecheck
 	@sed -e "s|%COLORSCHEME%|$(COLORSCHEME)|g" colorscheme.vim.in > colorscheme.vim
+	@find ~/.local/share/nvim -type d -name colorscheme | grep -q $(COLORSCHEME) || \
+		echo "NOTE: You will need to manually set a lightline theme in colorscheme.vim"
 	@echo "Successfully set colorscheme to $(COLORSCHEME)!"
 
 themecheck:
 	@echo
-	@echo "Available themes can be listed by runnning: make themes"
-	@echo
 ifeq ($(COLORSCHEME),)
+	@echo "Available themes can be listed by runnning: make themes"
 	@echo "Themes can be changed by running: make COLORSCHEME=<somescheme> theme"
 	@echo
 else
