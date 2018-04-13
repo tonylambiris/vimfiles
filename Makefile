@@ -8,18 +8,18 @@ install:
 	@echo "Fetching vim-plug and plug-ins..."
 	@mkdir -p ~/.config/nvim ~/.local/share/nvim
 	@curl -sfLo ~/.config/nvim/autoload/plug.vim --create-dirs $(VIMPLUG)
-	@nvim -u NORC '+so ~/.vim/vimrc | PlugInstall! | qall!'
+	@nvim -u NORC '+so ~/.vim/vimrc | PlugInstall | qa!'
 	@ln -sf ~/.vim/vimrc ~/.config/nvim/init.vim
 	@echo "Installation successful!"
 
 update: clean
 	@echo "Updating vim-plug and plug-ins..."
-	@nvim -u NORC '+so ~/.vim/vimrc | PlugUpdate! | qall!'
+	@nvim -u NORC '+so ~/.vim/vimrc | PlugUpdate | PlugUpgrade | qa!'
 	@echo "Update successful!"
 
 clean:
 	@echo "Cleaning any unused plug-ins..."
-	@nvim -u NORC '+so ~/.vim/vimrc | PlugClean! | qall!'
+	@nvim -u NORC '+so ~/.vim/vimrc | PlugClean | qa!'
 	@echo "Clean successful!"
 
 remove:
