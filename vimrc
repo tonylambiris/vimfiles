@@ -26,6 +26,8 @@ Plug 'taohex/lightline-buffer'
 Plug 'ryanoasis/vim-devicons'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fidian/hexmode'
+Plug 'fntlnz/atags.vim'
+Plug 'int3/vim-extradite'
 
 " Themes
 Plug 'flazz/vim-colorschemes'
@@ -248,6 +250,9 @@ let g:strip_whitespace_on_save = 1
 let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help']
 " disable stripping for markdown files
 autocmd FileType markdown DisableStripWhitespaceOnSave
+
+" Generate tags everytime a file is being written.
+"autocmd BufWritePost * call atags#generate()
 
 " ----------[ various settings
 set number
