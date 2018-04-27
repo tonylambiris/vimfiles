@@ -28,9 +28,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fidian/hexmode'
 Plug 'fntlnz/atags.vim'
 Plug 'int3/vim-extradite'
+Plug 'Yggdroot/indentLine'
+Plug 'chrisbra/Colorizer'
 
 " Themes
-Plug 'flazz/vim-colorschemes'
 Plug 'mhartington/oceanic-next'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'jackiehluo/vim-material'
@@ -52,6 +53,12 @@ Plug 'cocopon/iceberg.vim'
 Plug 'carlson-erik/wolfpack'
 Plug 'whatyouhide/vim-gotham'
 Plug 'nightsense/vim-crunchbang'
+Plug 'zeis/vim-kolor'
+Plug 'sjl/badwolf'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'jdkanani/vim-material-theme'
+Plug 'drewtempelmeyer/palenight.vim'
 
 call plug#end()
 
@@ -67,6 +74,10 @@ endif
 if exists('g:loaded_webdevicons')
 	call webdevicons#refresh()
 endif
+
+" ----------[ indentLine
+let g:indentLine_enabled = 1
+map <silent> <C-i> :IndentLinesToggle<CR>
 
 " ----------[ vim-filer
 let g:vimfiler_as_default_explorer = 1
@@ -138,21 +149,6 @@ vnoremap ! :ClamVisual<space>
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
-" ----------[ YouCompleteMe
-"let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_extra_conf.py"
-"let g:ycm_filetype_blacklist = {
-"			\ 'tagbar' : 1,
-"			\ 'qf' : 1,
-"			\ 'notes' : 1,
-"			\ 'markdown' : 1,
-"			\ 'unite' : 1,
-"			\ 'text' : 1,
-"			\ 'vimwiki' : 1,
-"			\ 'pandoc' : 1,
-"			\ 'infolog' : 1,
-"			\ 'mail' : 1
-"			\ }
-
 " ----------[ lightline
 let g:lightline = {
 			\ 'active': {
@@ -191,6 +187,136 @@ let g:lightline = {
 			\ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
 			\ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
 			\ }
+
+"let g:lightline = {
+"		\ 'colorscheme': 'wombat',
+"		\ 'active': {
+"		\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
+"		\   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+"		\ },
+"		\ 'component_function': {
+"		\   'fugitive': 'LightlineFugitive',
+"		\   'filename': 'LightlineFilename',
+"		\   'fileformat': 'LightlineFileformat',
+"		\   'filetype': 'LightlineFiletype',
+"		\   'fileencoding': 'LightlineFileencoding',
+"		\   'mode': 'LightlineMode',
+"		\   'ctrlpmark': 'CtrlPMark',
+"		\ },
+"		\ 'component_expand': {
+"		\   'syntastic': 'SyntasticStatuslineFlag',
+"		\ },
+"		\ 'component_type': {
+"		\   'syntastic': 'error',
+"		\ },
+" 		\ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+" 		\ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+" 		\ }
+
+function! LightlineModified()
+	return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+	return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! LightlineFilename()
+	let fname = expand('%:t')
+	return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+		\ fname == '__Tagbar__' ? g:lightline.fname :
+		\ fname =~ '__Gundo\|NERD_tree' ? '' :
+		\ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+		\ &ft == 'unite' ? unite#get_status_string() :
+		\ &ft == 'vimshell' ? vimshell#get_status_string() :
+		\ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+		\ ('' != fname ? fname : '[No Name]') .
+		\ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineFugitive()
+	try
+	if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+		let mark = ''  " edit here for cool mark
+		let branch = fugitive#head()
+		return branch !=# '' ? mark.branch : ''
+	endif
+	catch
+	endtry
+	return ''
+endfunction
+
+function! LightlineFileformat()
+	return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+	return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightlineFileencoding()
+	return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+function! LightlineMode()
+	let fname = expand('%:t')
+	return fname == '__Tagbar__' ? 'Tagbar' :
+		\ fname == 'ControlP' ? 'CtrlP' :
+		\ fname == '__Gundo__' ? 'Gundo' :
+		\ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+		\ fname =~ 'NERD_tree' ? 'NERDTree' :
+		\ &ft == 'unite' ? 'Unite' :
+		\ &ft == 'vimfiler' ? 'VimFiler' :
+		\ &ft == 'vimshell' ? 'VimShell' :
+		\ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! CtrlPMark()
+	if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+	call lightline#link('iR'[g:lightline.ctrlp_regex])
+	return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+			\ , g:lightline.ctrlp_next], 0)
+	else
+	return ''
+	endif
+endfunction
+
+let g:ctrlp_status_func = {
+	\ 'main': 'CtrlPStatusFunc_1',
+	\ 'prog': 'CtrlPStatusFunc_2',
+	\ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+	let g:lightline.ctrlp_regex = a:regex
+	let g:lightline.ctrlp_prev = a:prev
+	let g:lightline.ctrlp_item = a:item
+	let g:lightline.ctrlp_next = a:next
+	return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+	return lightline#statusline(0)
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+	let g:lightline.fname = a:fname
+	return lightline#statusline(0)
+endfunction
+
+augroup AutoSyntastic
+	autocmd!
+	autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+	SyntasticCheck
+	call lightline#update()
+endfunction
+
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
 
 " lightline-buffer ui settings
 " replace these symbols with ascii characters if your environment does not support unicode
