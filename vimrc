@@ -10,6 +10,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimfiler.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
@@ -32,6 +34,9 @@ Plug 'Yggdroot/indentLine'
 Plug 'chrisbra/Colorizer'
 
 " Themes
+Plug 'nightsense/snow'
+Plug 'bcicen/vim-vice'
+Plug 'exitface/synthwave.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'jackiehluo/vim-material'
