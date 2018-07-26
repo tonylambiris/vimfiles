@@ -53,6 +53,6 @@ ifeq ($(COLORSCHEME),)
 else
 	@find ~/.local/share/nvim -type d -name colors -exec find "{}" -type f -name '*.vim' \; | xargs -n 1 basename | cut -d '.' -f 1 | sort -u | grep -q $(COLORSCHEME)
 endif
-COLORSCHEME?=palenight
+COLORSCHEME?=vice
 
 .PHONY: all
