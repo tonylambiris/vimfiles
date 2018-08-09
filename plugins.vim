@@ -1,0 +1,30 @@
+Plug 'airblade/vim-gitgutter'
+Plug 'chrisbra/Colorizer'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fidian/hexmode'
+Plug 'fntlnz/atags.vim'
+Plug 'int3/vim-extradite'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'majutsushi/tagbar'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'romainl/vim-qf'
+Plug 'roman/golden-ratio'
+Plug 'ryanoasis/vim-devicons'
+Plug 'scrooloose/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimfiler.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'sjl/clam.vim'
+Plug 'taohex/lightline-buffer'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'vim-syntastic/syntastic'
+Plug 'whatyouhide/vim-lengthmatters'
+Plug 'Yggdroot/indentLine'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
