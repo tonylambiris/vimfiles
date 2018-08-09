@@ -2,68 +2,16 @@
 call plug#begin('~/.local/share/nvim/plugged/')
 
 " Plugins
-Plug 'tpope/vim-sensible'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'scrooloose/nerdtree'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimfiler.vim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'itchyny/lightline.vim'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'whatyouhide/vim-lengthmatters'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'roman/golden-ratio'
-Plug 'sheerun/vim-polyglot'
-Plug 'majutsushi/tagbar'
-Plug 'sjl/clam.vim'
-Plug 'yuttie/comfortable-motion.vim'
-Plug 'romainl/vim-qf'
-Plug 'taohex/lightline-buffer'
-Plug 'ryanoasis/vim-devicons'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'fidian/hexmode'
-Plug 'fntlnz/atags.vim'
-Plug 'int3/vim-extradite'
-Plug 'Yggdroot/indentLine'
-Plug 'chrisbra/Colorizer'
+let $PLUGINS = $HOME . "/.vim/plugins.vim"
+if filereadable($PLUGINS)
+	source $PLUGINS
+endif
 
 " Themes
-Plug 'nightsense/snow'
-Plug 'bcicen/vim-vice'
-Plug 'exitface/synthwave.vim'
-Plug 'mhartington/oceanic-next'
-Plug 'KeitaNakamura/neodark.vim'
-Plug 'jackiehluo/vim-material'
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'jacoborus/tender.vim'
-Plug 'rakr/vim-one'
-Plug 'yuttie/hydrangea-vim'
-Plug 'joshdick/onedark.vim'
-Plug 'nightsense/seabird'
-Plug 'trevordmiller/nova-vim'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'Badacadabra/vim-archery'
-Plug 'dim13/smyck.vim'
-Plug 'nightsense/carbonized'
-Plug 'Drogglbecher/vim-moonscape'
-Plug 'arcticicestudio/nord-vim'
-Plug 'cocopon/iceberg.vim'
-Plug 'carlson-erik/wolfpack'
-Plug 'whatyouhide/vim-gotham'
-Plug 'nightsense/vim-crunchbang'
-Plug 'zeis/vim-kolor'
-Plug 'sjl/badwolf'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'jdkanani/vim-material-theme'
-Plug 'drewtempelmeyer/palenight.vim'
+let $THEMES = $HOME . "/.vim/themes.vim"
+if filereadable($THEMES)
+	source $THEMES
+endif
 
 call plug#end()
 
