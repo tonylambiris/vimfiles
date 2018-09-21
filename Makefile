@@ -1,7 +1,7 @@
 VIMPLUG?=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 COLORSCHEME?=
 
-all: install update clean theme
+all: install clean theme
 
 reinstall: remove all
 
@@ -15,7 +15,7 @@ install:
 
 update:
 	@echo "Updating vim-plug and plug-ins..."
-	@nvim -u NORC '+so ~/.vim/vimrc | PlugUpdate | PlugUpgrade | qa!'
+	@nvim --headless +PlugUpdate +PlugUpgrade +GoUpdateBinaries +qa
 	@echo "Update successful!"
 
 clean:
