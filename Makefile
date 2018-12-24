@@ -48,6 +48,10 @@ theme:
 	@echo ">> Available themes can be listed by runnning: make themes"
 	@echo ">> Themes can be changed by running: make theme COLORSCHEME=<somescheme>"
 	@echo
+	@if [ -f "colorscheme.vim" ]; then \
+		echo -n "Currently configured: "; \
+		head -1 colorscheme.vim | awk '{print $$2}'; \
+		fi
 else
 theme: themecheck
 	@sed -e "s|%COLORSCHEME%|$(COLORSCHEME)|g" colorscheme.vim.in > colorscheme.vim
